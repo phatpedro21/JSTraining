@@ -1,12 +1,14 @@
-'use strict'
+Async - Await 'process' is still based off Promises.
 
-var x = 0x22;
+Here we use the async keyword to define an async function.
 
-console.log(x);
+We can then use the await keyword which tells the code to 'wait' for completion 
+of the following lines, before continuing. This removes the need for callback
 
 
+/*Code examples for explanation*/
 
-///Async await examples
+//added a num param to show how we can 'caputure' a return
 function asyncMethod(message, num){
     return new Promise(function(fulfill, reject){
         setTimeout(function(){
@@ -17,6 +19,7 @@ function asyncMethod(message, num){
 
     }); 
 }
+
 
 //We define an async method (here we call it main), and then prefix each 'step' with await
 
@@ -32,4 +35,5 @@ async function main(){
     let four = await asyncMethod("Do Stuff", three);    
 }
 
+//then we call main to perform the tasks
 main();

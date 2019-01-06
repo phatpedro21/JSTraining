@@ -1,0 +1,18 @@
+One cross platform consideration is that
+
+On Mac and Windows,  
+
+a file called 
+
+myObject.js and myobject.js are considered the same
+
+However, on linux this is not the case.
+
+With this in mind, files should be named in lowercase, with '-' inbetween words
+to ensure our code is truly crossplatform 
+
+--e.g. 
+
+    my-object.js 
+
+    ^ This is the suggested way to name files

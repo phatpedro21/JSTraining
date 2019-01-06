@@ -1,0 +1,29 @@
+This section will discuss ways to avoid callback hell, and 'christmas tree' code
+
+While promises can be a better solution, we are still going to look at better ways
+to write code with call back.
+
+NAMED FUNCTIONS
+---------------
+To avoid the chaos of anonymous functions and sprawling callbacks, we can simply
+'pull' the function out, name it and call it by name where we need it.
+
+(This can be done recursively, bearing in mind ,we may need to pull out only to the local
+scope, and not all the way to global, to ensure we can access relevant variables)
+
+
+
+WE also need to consider error handling. And one pattern for this is to 
+set call backs up to take error and result (this is a node.js pattern)
+
+e.g. 
+doThing(err, result)
+
+And then, within the function check 
+if(err){
+    //where done is 'last' callback
+    done(err,null);
+    //Good practice to call return whenever we are 'DONE'
+    return;
+}
+
