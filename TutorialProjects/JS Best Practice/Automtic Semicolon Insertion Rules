@@ -1,0 +1,56 @@
+SEMICOLONS
+-----------
+ECMAScript Standards suggest that, in some cases, semicolons may be emmited from statements.
+To understand where we may be able to ommit the semicolon, we should look into the rules used by
+javascript Automatic Semicolon Insertion.
+
+Semicolons are automatically inserted...
+1.
+When, as a Script or Module is parsed from left to right, a token(called the offending token) is
+encountered that is not allowed by any production of the grammar
+    -If the offending token is separated from the previous token by at least one LineTerminator
+    -If the offending token is a '}'
+==
+e.g.
+
+var a = 12
+var b = 12
+//When the first line is read, it will continue to read until it hits the v of var in the next line,
+//which would be an offending token (previous token was 12, a number)
+//As there is a linebreak between, a semicolon would be automatically inserted
+
+
+if(a){console.log(a)}
+//As the } is hit, it would be considered an offending token (isn't allowed in the statment leading up to it)
+//a semicolon would be automatically inserted before it
+
+==========================================
+2.
+When, as the Script or Module is parsed from left to right, the end of the input stream of tokens is
+encountered, then a semicolon is automatically inserted at the end of the input stream
+==
+
+The end of a file/stream, will have a semicolon will be automatically added.
+
+==========================================
+3.
+When, a token is encountered that is allowed by some production of the grammar, but the production
+is a restricted productions and the token would be the first token of a restricted production, and
+the restricted token is separated from the previous token by at least one Line Terminator, then the 
+semicolon is automatically inserted before the restricted token.
+
+(restricted production is things like continue, break, return, throw)
+==
+e.g.
+
+function returnObject()
+{
+    return
+    {
+        value1:"Hello"
+    }
+}
+
+//Here, as return is a restricted production, when it sees the curly brace on the new line, a semicolon will be automatically
+//inserted after 'return', meaning no object would be returned. This would be 'not what we want' and 
+//unexpected behaviour.

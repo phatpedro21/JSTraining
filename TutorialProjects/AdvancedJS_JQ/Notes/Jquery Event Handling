@@ -1,0 +1,92 @@
+Commonly, the short hand methods offered by jquery are used to attach
+event handlers to elements
+
+These include:
+.click()
+.dblclick()
+.focus()
+.load()
+
+And these functions accept a handler method as a parameter
+
+
+
+EVENT PROPAGATION
+---------------------
+There are many events being 'generated' all the time, even when we are not listening to them
+For example, in Event_3.html we are listening for click and dblclick, but there would also be 
+mousedown, mouseup, mousemove etc... events occuring.
+
+We may want to 'cancel' these events as other things (e.g. the browser) may perform actions based
+upon them, that we do not wish to happen. E.g. the highlighting of text on a double click.
+
+Event propagation is when an event will be passed successively to parents until it is handeled. 
+e.g. if we are not listening for a mouseover event, it will be passed to the elements parent, then its parent
+and so on until it is handled all the up to the document object where it is disposed of if not handled.
+
+This is known as 'Bubbling Up The Dom'
+
+There is discussion about the correct way to 'cancel' an event.
+
+Event handlers are not supposed to return an event, so while returning false (as in Event_3) will work,
+it may be frowned upon and is not guaranteed to be 'respected' by future browsers
+
+Jquery provides a preventDefault() function which will prevent the default or usual event action.
+
+There are also two Jquery functions
+
+stopPropagation()
+stopImmediatePropagation()
+
+There are more details about these in Events_4.html
+
+
+ADDING EVENT HANDLERS WITHOUT USING THE SHORT HAND METHODS
+----------------------------------------------------------
+
+.bind('eventName', handlerFunction())
+
+will bind a handler to a particular event on an element
+
+.unbind('eventName') will remove and event handler added using .bind()
+
+--
+
+.live('eventName', handerFunction())
+
+will add handlers to elements that already exisit, AND new elements as they are 
+'created'.
+It does this by attaching an element to the Document Object, and any events that bubble
+all the way up to the DOM are caught and process for any elements the .live method is looking
+out for.
+
+.die('eventName') removes handlers added by .live()
+
+--
+
+.delegate('selector', 'click', function(event))
+
+.delegate() is a more robust, efficient version of .live(), which plays more nicely when
+used in method chains.
+
+.undelegate removes handlers assigned by .delegate
+
+--
+
+These methods have been 'superseded' by 
+.on() and .off(),
+and infact, bind,live,delegate all call on/off behind the scenes
+
+.on('eventName', handler()) to work like .live or .bind
+or 
+.on('eventName', selector, handler()) to make it operate like .delegate
+
+
+.off('eventName') like, .die, .unbind, .undelegate
+
+--
+
+.one('eventName', handler()) will add a One Time handler, once handled, the off method will
+be called to remove the handler
+
+SEE Events_5.html for examples

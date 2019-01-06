@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+    <head>
+        <head><title>Draw - Version 1</title></head>
+        <style>
+            #theCanvas {background: #d33ddd};
+        </style>
+        <script src=""></script>
+    </head>
+    <body>
+        <p>Title</p>
+        <!--"assuming screen size is 640x480 for demo purpose-->
+        <canvas id="theCanvas" width="640", height="480">
+            Attention! Your broswer does not support the Canvas!
+        </canvas>
+    </body>
+
+    <script>
+    //_KSM is used as a unique global namespace for our work
+    _KSM =
+    {
+        //This example shows a stub, which allows our code to continue calling the
+        //'old' draw function which doesn't accept colours, but is also maintanable, as it 
+        //only has one line. This would get cumbersome if we need to support many older versions
+        //These are useful for quick 'fixes' to support legacy code, but not ideal.  
+        draw:function(left, top, width, height)
+        {
+            _KSM.drawNew(left,top,width,height,"black","silver")
+        },        
+        drawNew:function(left, top, width, height, stroke, fill)
+        {
+            //Draw something on canvas
+            var canvas = document.getElementById("theCanvas");
+            if(canvas.getContext)
+            {
+                var context = canvas.getContext('2d');
+                context.strokeStyle = stroke;
+                context.fillStyle= fill;
+                context.fillRect(left,top,width,height);
+                context.strokeRect(left,top,width,height);
+            }
+        }
+    }
+    _KSM.draw(5,5,120,120);
+    _KSM.drawNew(70, 90, 500, 300, "green", "burleywood");
+    </script>
+</html>

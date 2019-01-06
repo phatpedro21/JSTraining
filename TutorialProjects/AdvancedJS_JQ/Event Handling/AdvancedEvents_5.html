@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Advanced Events 5</title>
+        <script src="http://code.jquery.com/jquery-1.7.min.js"></script>
+        <link type="text/css" rel="stylesheet" href="./EventStyles.css"/>
+    </head>
+    <body>
+        <div class="clickable" id="WorkArea">
+            <h5 class="clickable">Work Area</h5>
+            <hr/>
+            <input type="button" class="clickable" value="Click Here"/>
+            <p class="clickable">Try clicking this paragraph</p>
+            <p class="clickable">and try to click the word 
+                <span class="clickable">-CLICK-</span>
+               (the second one silly)
+            </p>
+       </div>
+        <div id="Messages">
+            <h5 class="clickable">Messages</h5>
+            <hr/>
+        </div>
+    </body>
+
+    <script>
+    $(function(){
+     
+        var showEventMessage = function(options){
+            options = $.extend({
+                eventType: "CLICK",
+                eventTarget: this,
+                suffix: "<br/>"
+            }, options)
+            var message = options.eventType + ": " + (options.eventTarget.nodeName || "unknown") + options.suffix;
+            $("#Messages").append(message);
+        },
+        
+        internalObject = { records: [], maxCount: 5, /*Adding a nodeName value for better evetMessage*/ nodeName:"Internal Obj"},
+
+
+        //Creating an object for event notifications
+        notifyObject = $({nodeName: "INTERNAL" /*nodeName for better event messaging clarity*/}),
+
+
+        loadRecord = function(){
+            var id= internalObject.records.length;
+            if(id < internalObject.maxCount)
+            {
+                internalObject.records.push(
+                    {description: 'Record ID ' + id,
+                     value: Math.floor(Math.random() * 5000)
+                    }
+                );
+                setTimeout(loadRecord, Math.floor(Math.random()*1000));
+            }
+            else
+                //Instead of calling the event from internalObject, we call it from our notifyObject, to centralise
+                //our event handling
+
+                //We can pass params to the eventHandler here, as the second argument on the trigger function,
+                //in this case we pass internalObject to make it available to the recordloaded event
+                $(notifyObject).trigger("allrecordsloaded", internalObject);
+
+                
+        }
+
+        $('.clickable')   
+            //to pass params when we cannot use the trigger method (e.g. non custom events), we can add the 
+            //param object/array as the second arg of .on()         
+            .on("click.test", internalObject, function(event)
+            {
+                //We will create a custom event that fires when an element is clicked three times.
+                //We start by keeping a counter, on the object reference to the element that has been clicked
+                var $this = $(this),
+                    clickCount = ($this.data('clickcount') || 0) + 1;
+                
+                $this.data('clickcount', clickCount);
+                showEventMessage.call(this, {eventType: "" + clickCount + ") " + event.type});
+                   
+                //If element has been clicked 3 times, fire click3 event
+                if(clickCount === 3)
+                    $this.trigger('click3');
+
+                //If our button is clicked, start loading records
+                if($this.attr('type') === "button")
+                {
+                    //We can then access the passed data via event.data
+                    var paramObject = event.data || {records:[]};
+                    $("#Messages").append("Record count: " + paramObject.records.length + "<br/>");
+                    loadRecord();
+                }    
+            })
+            .on('click3', function(event){
+                //We dont want this to fire for any other element
+                event.stopPropagation();
+                $(this).addClass("highlight");
+                showEventMessage.call(this, {eventType:event.type});
+            }) 
+            
+            
+            $(notifyObject)
+                //We need to tell out handler function to expect parameters
+                .on('allrecordsloaded', function(event, paramObject){
+                    showEventMessage.call(this, {eventType:event.type});
+                    $.each(paramObject.records, function(){
+                        $('#Messages').append('--' + this.description + ": " + this.value + "<br/>");
+                    });
+                })
+    }); 
+
+    </script>
+</html>

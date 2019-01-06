@@ -1,0 +1,40 @@
+When comparing two objects, there are two comparison operators
+
+'=='  and  '==='
+
+'=='
+Will compare the value of two objects. It will try to convert
+objects to be the same type and then compare
+e.g. 
+
+4 == '4' is true
+0 == false is true
+
+
+'==='
+Will compare 'EXACTLY' will not convert type, if they are different automatically false,
+else it'll check if they are same
+
+4 === '4' is false
+
+
+
+--------------------------------------------------
+
+if(x) is short hand for  if(x == true)
+
+so using if(x) to check for existence may have unexpected outcomes.
+
+e.g.
+
+//X not defined
+if(x){} //Will error
+
+x = 0;
+if(x)   //Will be false
+
+
+It is better to check...
+
+if(typeof x !== "undefined");
+

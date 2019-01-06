@@ -1,0 +1,52 @@
+In jqQuery, instead of relying on callback functions for asychronous processing, we
+can make use of jQuery deferred objects
+
+jQuery Deferred objects implement javascript promises
+
+
+We can think of deferred objects as handling 
+
+WHEN 'a thing' HAPPENS, THEN, DO 'another thing'
+
+
+
+NEGATIVE TESTING
+----------------
+It is good to test for 'exceptions' and build code that handles these. 
+When using deferred objects there are a number of ways to specify what should
+happen if an 'process' fails
+See Deferred_4 for examples
+
+
+DEFERRED OBJECTS
+-----------------
+A deferred object is essentially just a wrapper around a number of asych calls,
+instead of handling all of them separately, we can wrap them in one object to 
+deal with completion or failure
+
+when() returns a full deferred object to be 'used' in subsequent operation
+
+We can chain handlers (like then()) to a when() method, but we can also keep hold of them
+deferred object to use it later on.
+
+However, we could potentially edit the deferred object, which could 'mess up' future flow.
+
+a PROMISE is a subset of a deferred object, which we can attach handlers too, but cannot be changed by us.
+
+There are a number of handlers that can be attached to deferred objects (including promises)
+these include...
+then() -- takes up to three handlers that associate to success, fail and progress.
+          We can however handle all of these with individual handlers for each
+done() -- Fires on a success
+fail() -- Fires on a failure (only fails once, no matter how many failures occured in the watched block)
+progress() -- Returns 'progress' through a process, useful for updating progres bars etc...
+always() -- Fires not matter the result
+
+
+The following will change the state of sa deferrd object
+resolve
+reject
+(these can only be called on full deferred objects, not promises, this is why promises are 'safer')
+
+
+

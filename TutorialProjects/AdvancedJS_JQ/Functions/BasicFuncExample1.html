@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+    <head>
+        <!--INCLUDING JQUERY-->
+        <script src="http://code.jquery.com/jquery-1.7.min.js"></script>
+       
+    </head>
+    <body>
+        <div id="div1">
+            <p>Results:</p>
+        </div>
+        <hr/>
+        <div id="div2"></div>
+    </body>
+</html>
+
+<script>
+    //$() is short hand for $(document).ready()
+    $(function()
+    {
+        var $div1 = $('#div1'),
+            $div2 = $('#div2');
+        
+        //This function is defined globablly, could conflict with other scripts/modules
+        function1 = function(){
+            $div1.append("Function 1 Executed<br/>");
+        }
+
+        //This function defined with var, so only within this scope
+        var function2 = function(){
+            $div1.append("Function 2 Executed<br/>");
+        } 
+
+        //This function appended to an object only visible in this scope
+        var obj = {
+            function3:function(){
+            $div1.append("Function 3 Executed<br/>");
+            }
+        }
+
+        //This function appened to a globally visible object
+        globj = {
+            function4:function(){
+            $div1.append("Function 4 Executed<br/>");
+            }
+        }
+
+        function1();
+        function2();
+        obj.function3();
+        globj.function4();
+        
+        div1.append("<br/>");
+
+        //Now loading another page (with other scripts) into div2
+        div2.load('BasicFuncExample2.html');
+    });
+   
+</script>

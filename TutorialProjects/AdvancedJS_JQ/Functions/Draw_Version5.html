@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+    <head>
+        <head><title>Draw - Version 1</title></head>
+        <style>
+            #theCanvas {background: #d33ddd};
+        </style>
+        <script src=""></script>
+    </head>
+    <body>
+        <p>Title</p>
+        <!--"assuming screen size is 640x480 for demo purpose-->
+        <canvas id="theCanvas" width="640", height="480">
+            Attention! Your broswer does not support the Canvas!
+        </canvas>
+    </body>
+
+    <script>
+    //_KSM is used as a unique global namespace for our work
+    _KSM =
+    {
+        //To allow for legacy, we can set up in the following way,
+        //Expect 'max' params
+        draw:function(left, top, width, height, stroke, fill)
+        {
+            //Create internal object
+            var options = {}; 
+
+            //Draw something on canvas
+            var canvas = document.getElementById("theCanvas");
+            if(canvas.getContext)
+            {
+                //Check if first param is an object (new implementation) or not (legacy implementation)
+            if(typeof left !== 'undefined')
+                if(typeof left === 'object')
+                    //Assign 'first' param to our object and continue
+                {   
+                    options = left;
+                }
+                else
+                    //Use passed params to build the object
+                {    options = {
+                        left:left,
+                        top: top,
+                        width: width,
+                        height: height,
+                        fill:fill,
+                        stroke:stroke
+                    } ;
+                }
+
+            
+            //Setting canvas width will clear its contents
+            if(options.clear)
+                canvas.width = canvas.width;
+            options.left = options.left || _KSM.drawOptions.left;
+            options.top = options.top || _KSM.drawOptions.top;
+            options.width = options.width || _KSM.drawOptions.width;
+            options.height = options.height || _KSM.drawOptions.height;
+            options.stroke = options.stroke || _KSM.drawOptions.stroke;
+            options.fill = options.fill || _KSM.drawOptions.fill;
+
+                var context = canvas.getContext('2d');
+                context.strokeStyle = options.stroke;
+                context.fillStyle= options.fill;
+                context.fillRect(options.left,options.top,options.width,options.height);
+                context.strokeRect(options.left,options.top,options.width,options.height);
+            }
+        },
+        //WE create an exposed drawOptions object, which will hold our defaults
+        //This way, defaults can be updated and defined by the caller, say if we wanted
+        //to create many rectangles , we could update default width and height, and just pass
+        //positions and colours for these.
+        drawOptions:{
+            left:10, top:10, width:100, height:100,stroke:'black',fill:'silver',clear:false
+        }
+
+
+    }
+
+
+    
+
+   _KSM.draw(10,undefined,40,40,"Orange"); 
+   _KSM.draw({
+        left:100,
+        top:100,
+        width:400,
+        height:30,
+        fill:"green"
+    });   
+    //Clear old objects with first sqaure    
+    //draw our sqaures
+    _KSM.draw({top:10,left:10, clear:true});
+    _KSM.draw({top:10,left:530});
+    _KSM.draw({top:370,left:10});
+    _KSM.draw({top:370,left:530});
+
+    //set defaults for our green rectangles
+    _KSM.drawOptions.fill = "green";
+    _KSM.drawOptions.width = 300;
+    _KSM.drawOptions.height = 80;
+
+    //draw green rectangles top/bottom
+    _KSM.draw({top:10, left:170});
+    _KSM.draw({top:390, left:170});
+
+    
+    </script>
+</html>

@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+    <head>
+        <head><title>Draw - Version 1</title></head>
+        <style>
+            #theCanvas {background: #d33ddd};
+        </style>
+        <script src=""></script>
+    </head>
+    <body>
+        <p>Title</p>
+        <!--"assuming screen size is 640x480 for demo purpose-->
+        <canvas id="theCanvas" width="640", height="480">
+            Attention! Your broswer does not support the Canvas!
+        </canvas>
+    </body>
+
+    <script>
+    //_KSM is used as a unique global namespace for our work
+    _KSM =
+    {
+        //Showing an example of default values. Any not passed named variable, will be undefined
+        draw:function(left, top, width, height, stroke, fill)
+        {
+            
+            //So we can check to see if an expected var is undefined
+            if(typeof left === 'undefined')
+                left = 10;
+            if(typeof top === 'undefined')
+                top = 10;
+            if(typeof width === 'undefined')
+                width = 100;
+            if(typeof height === 'undefined')
+                height = 100;
+            if(typeof stroke === 'undefined')
+                stroke = "black";
+            if(typeof fill === 'undefined')
+                fill = "silver";
+            //Draw something on canvas
+            var canvas = document.getElementById("theCanvas");
+            if(canvas.getContext)
+            {
+                var context = canvas.getContext('2d');
+                context.strokeStyle = stroke;
+                context.fillStyle= fill;
+                context.fillRect(left,top,width,height);
+                context.strokeRect(left,top,width,height);
+            }
+        }
+    }
+
+    _KSM.draw(10,10,50,50);
+    _KSM.draw(580,420,50,50);
+    _KSM.draw(110,110,400,260,"orange","blue");
+    _KSM.draw(5,400,90,35);
+    //Default value method leads to this messy kind of code if we dont want to enter all values in
+    //the expected order...
+    _KSM.draw(270,undefined,undefined,undefined,undefined,"green");    </script>
+</html>

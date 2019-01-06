@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+    <head>
+        <head><title>Draw - Version 1</title></head>
+        <style>
+            #theCanvas {background: #d33ddd};
+        </style>
+        <script src=""></script>
+    </head>
+    <body>
+        <p>Title</p>
+        <!--"assuming screen size is 640x480 for demo purpose-->
+        <canvas id="theCanvas" width="640", height="480">
+            Attention! Your broswer does not support the Canvas!
+        </canvas>
+    </body>
+
+    <script>
+    //_KSM is used as a unique global namespace for our work
+    _KSM =
+    {
+        //To allow for legacy, we can set up in the following way,
+        //Expect 'max' params
+        draw:function(left, top, width, height, stroke, fill)
+        {
+            //Create internal object
+            var options = {};           
+
+            //Draw something on canvas
+            var canvas = document.getElementById("theCanvas");
+            if(canvas.getContext)
+            {
+                //Check if first param is an object (new implementation) or not (legacy implementation)
+            if(typeof left !== 'undefined')
+                if(typeof left === 'object')
+                    //Assign 'first' param to our object and continue
+                {   
+                    options = left;
+                }
+                else
+                    //Use passed params to build the object
+                {    options = {
+                        left:left,
+                        top: top,
+                        width: width,
+                        height: height,
+                        fill:fill,
+                        stroke:stroke
+                    } ;
+                }
+
+            
+            //Now check if this object contains required values, else
+            //set them as default
+            if(typeof options.left === 'undefined') 
+                options.left = 10;
+            if(typeof options.top === 'undefined')
+                options.top = 10;
+            if(typeof options.width === 'undefined')
+                options.width = 100;
+            if(typeof options.height === 'undefined')
+                options.height = 100;
+            if(typeof options.stroke === 'undefined')
+                options.stroke = "black";
+            if(typeof options. fill === 'undefined')
+                options.fill = "silver";
+
+                var context = canvas.getContext('2d');
+                context.strokeStyle = options.stroke;
+                context.fillStyle= options.fill;
+                context.fillRect(options.left,options.top,options.width,options.height);
+                context.strokeRect(options.left,options.top,options.width,options.height);
+            }
+        }
+    }
+
+
+   _KSM.draw(10,undefined,40,40,"Orange"); 
+   _KSM.draw({
+        left:100,
+        top:100,
+        width:400,
+        height:30,
+        fill:"green"
+    });   
+    
+    </script>
+</html>

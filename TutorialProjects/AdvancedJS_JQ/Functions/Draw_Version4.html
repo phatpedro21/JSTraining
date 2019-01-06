@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+    <head>
+        <head><title>Draw - Version 1</title></head>
+        <style>
+            #theCanvas {background: #d33ddd};
+        </style>
+        <script src=""></script>
+    </head>
+    <body>
+        <p>Title</p>
+        <!--"assuming screen size is 640x480 for demo purpose-->
+        <canvas id="theCanvas" width="640", height="480">
+            Attention! Your broswer does not support the Canvas!
+        </canvas>
+    </body>
+
+    <script>
+    //_KSM is used as a unique global namespace for our work
+    _KSM =
+    {
+        //Expect a single object as out parameter
+        draw:function(options)
+        {
+            //Check if options is an obhject, else make it one
+            if (typeof options !== 'object')
+                options = {};
+            
+            //Now check if this object contains required values, else
+            //set them as default
+            if(typeof options.left === 'undefined')
+                options.left = 10;
+            if(typeof options.top === 'undefined')
+                options.top = 10;
+            if(typeof options.width === 'undefined')
+                options.width = 100;
+            if(typeof options.height === 'undefined')
+                options.height = 100;
+            if(typeof options.stroke === 'undefined')
+                options.stroke = "black";
+            if(typeof options. fill === 'undefined')
+                options.fill = "silver";
+
+            //Draw something on canvas
+            var canvas = document.getElementById("theCanvas");
+            if(canvas.getContext)
+            {
+                var context = canvas.getContext('2d');
+                context.strokeStyle = options.stroke;
+                context.fillStyle= options.fill;
+                context.fillRect(options.left,options.top,options.width,options.height);
+                context.strokeRect(options.left,options.top,options.width,options.height);
+            }
+        }
+    }
+
+    
+    _KSM.draw({
+        left:270,
+        top: 400,
+        width: 400,
+        height: 30,
+        fill: "green"
+    });
+    </script>
+</html>

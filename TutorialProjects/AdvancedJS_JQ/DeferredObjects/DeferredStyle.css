@@ -1,0 +1,39 @@
+
+
+#Div1, #Div2, #Div3{
+    position: absolute;
+    background-color: gray;
+    border: 1px solid black;
+    top:40px;
+    overflow-y: auto;
+    height: 200px;
+    width: 200px;
+}
+#Div1{
+    left:10px;
+}
+#Div2{
+    left:220px;
+}
+#Div3{
+    left:430px;
+}
+
+#Messages{
+    position: absolute;
+    width: 640px;
+    height: 200px;
+    overflow-y: auto;
+    top:320px;
+    
+}
+
+#LoadButton{
+    display: block;
+}
+
+#ProcButton{
+    position: absolute;
+    top:260px;
+    left:600px;
+}

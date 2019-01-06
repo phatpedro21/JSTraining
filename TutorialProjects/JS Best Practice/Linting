@@ -1,0 +1,34 @@
+A linter will scan code to detect potential problems and potential error
+
+
+Some linting tools...
+
+JSLint: was first tool, preconfigured, not easy to configur
+
+JSHint: fork of JSLint, more configurable, built in package support, not very extensible
+
+ESLint: custom rule support, lots of configuration,
+
+
+Recommended, JSHint for just getting linting going, easy introduction
+
+Many text editors have plugin support for JSHint
+
+or via command line, try installing JSHint globally (npm install -g jshint)
+and then simply call jshint "files to lint"
+Can also be 'plugged' nto gulp/npm script set up to run whenever these are run.
+
+
+
+CONFIGURING JSHint
+------------------
+We can tell JSHint to 'watch'/lint a lot of things that it doesnt by default,
+e.g. we can set JSHint to give a warning wherever we use '==' instead of '==='
+
+We set up these options with a .jshintrc file.
+Within this file we simply create a JSON object in the following way
+{
+    "configOption":true
+    //for example to watch for '=='
+    "eqeqeq": true
+}

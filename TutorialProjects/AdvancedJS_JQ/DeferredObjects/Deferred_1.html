@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+    <head>
+            <title>Deferred Processing 1</title>
+            <script src="http://code.jquery.com/jquery-1.7.min.js"></script>    </head>
+            <link type="text/css" rel="stylesheet" href="./DeferredStyle.css"/>
+    <body>
+
+        <input id="LoadButton" type="button" value="Load">
+        <br/>
+        <div id="Div1"></div>
+        <div id="Div2"></div>
+        <div id="Div3"></div>
+        <br/>
+        <input id="ProcButton" disabled type="button" value="Proceed">
+        <div id="Messages"></div>
+    </body>
+
+    <script>
+        $(function(){
+
+            //THIS EXAMPLE DOESNT SHOW THE USE OF DEFERRED PROCESSING, SIMPLY THE 'USUAL' METHOD,
+            //And exposes its problems. Deferred_2 shows how to work better, with deferred procesing
+
+            $("#LoadButton")
+                //When the load button is clicked, we want to load our content into our divs
+                .on('click', function(event){
+                    
+                    
+                    $("#Div1").load("Content1.html");
+                    $("#Div2").load("Content2.html");
+
+                    //To enable to proceed button after our content is loaded, we could make use of the .load() callback like so...
+                    //However this method may not be as 'desirable' as it seems
+                    $("#Div3").load("Content3.html", function(){
+                        $("#ProcButton").removeAttr("disabled");
+                    });
+
+                    //The big issue here, is that the proceed button will likely be enabled before the larger content 2 is fully loaded
+                    //which is not what we want, we want the button to be enabled once ALL content is FULLY loaded
+                });
+        });
+    </script>
+</html>

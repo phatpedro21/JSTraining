@@ -1,0 +1,104 @@
+----------SCOPE--------------------------
+
+Block scope is different to function scope.
+
+
+Variables defined with 'var' in a function are encapsulated
+variables defined with 'var' in any other scope, are 'global'
+
+the 'let' keyword, does not have this issue.
+
+
+---------FUNCTIONS------------------------
+
+ES2015 allows us to define functions without the  function keyword
+using => notation
+
+Arrow functions do not 'care' who called them. Their 'this' is always
+wht is was at creation. 
+
+----------OBJECT LITERALS-----------------
+When defining object literals we can short hand define a function like scope
+
+const value2NameExpression = "Value2";
+const ten = 10;
+
+const obj ={
+    value1:"value",
+    
+    //This second value will be called "Value2", the sqaure brackets are evaluated first
+    [value2NameExpression]:10
+    
+    //Where value name is same what it is pointing to, we can make it short hand
+    //e.g.
+    ten,
+    //instead of 
+    ten:ten,
+
+    //Example of shorthand func def
+    func1() {},
+    
+    //for arrow functions we can still
+    func2: () => {}
+}
+
+-------SQAURE BRACKETS---------------------
+
+[>>>] will evaluate >>> first, then use that as a prperty name etc...
+ 
+-----------DESTRUCTURING------------------
+
+Destructuring can be done on objects and arrays
+
+e.g.
+
+const {PI,E,SQRT2} = Math
+
+pulls just those three parts of the math object, out into individual 
+variables.
+
+Can also do this with function parameters. For example if we expect a car object 
+to be passed in, but only what its Brand and HorsePower values in the function we can destructure 
+like so...
+
+const doSomethingWithCar({brand, horsePower}) => {
+    //We can now simply refer to 
+    console.log(brand)
+    //rather than
+    //console.log(car.brand)
+}
+
+
+----------REST SYNTAX--------------
+
+the '...VarName' syntax will gather the remaining values that are yet to be 
+destructured.
+
+the '...' can also be used to spread an array or object into another
+array or object, useful when creating a copy
+
+e.g.
+
+var newArray = [...anotherArray];
+
+But these are shallow copies....
+
+
+----------CLASSES---------------------
+
+class ClassName [extends OtherClass (optional)]{
+    constructor(){
+        this.name = "Class";
+    }
+    memberFunction(){
+
+    }
+
+}
+
+
+--------PROMISES AND ASYNC/AWAIT--------
+
+RESEARCH FURTHER!!!
+
+Makes working with Promises cleaner and easier

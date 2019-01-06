@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Events 1</title>
+        <script src="http://code.jquery.com/jquery-1.7.min.js"></script>
+        <link type="text/css" rel="stylesheet" href="./EventStyles.css"/>
+    </head>
+    <body>
+        <!--Now we have nested clickable objects... (this will show how events propagate)-->
+        <div class="clickable" id="WorkArea">
+            <h5 class="clickable">Work Area</h5>
+            <hr/>
+            <input type="button" class="clickable" value="Click Here"/>
+            <p class="clickable">Try clicking this paragraph</p>
+            <p class="clickable">and try to click the word 
+                <span class="clickable">-CLICK-</span>
+               (the second one silly)
+            </p>
+       </div>
+        <div id="Messages">
+            <h5 class="clickable">Messages</h5>
+            <hr/>
+        </div>
+    </body>
+
+    <script>
+    $(function(){
+
+        //Creating a function to handle the event messages being created
+        //Takes an options object
+        var showEventMessage = function(options){
+            //Ensures options has bare minimum values
+            options = $.extend({
+                eventType: "CLICK",
+                eventTarget: this,
+                suffix: "<br/>"
+            }, options)
+            var message = options.eventType + ": " + (options.eventTarget.nodeName || "unknown") + options.suffix;
+            $("#Messages").append(message);
+        },
+
+        //Creating our named handler function, which takes an event object param
+        eventMessageHandler = function(event){
+            if(!event.isPropagationStopped() &&
+                    !event.isImmediatePropagationStopped() &&
+                    !event.isDefaultPrevented())
+                {
+                    showEventMessage.call(this, {eventType: "namedHandler " + event.type}); 
+                    event.stopPropagation();           
+                };
+        }
+
+
+        $('.clickable')
+            //We pass our named handler as the second argument, instead of an anonymous function
+            .on("click dblclick", eventMessageHandler)
+            //We can then remove just this handler, rather than all handlers for an event.
+            //Here we remove eventMessageHandler from click, but any other handlers would remain
+            .off('click',eventMessageHandler)    
+            //selectstart is an internet explorer event that handles selection of text, to ensure our code works as 
+            //expected in IE, we are including this handler.
+            .on('selectstart', function(event){
+                return false;
+            });
+    });
+  
+
+    </script>
+</html>

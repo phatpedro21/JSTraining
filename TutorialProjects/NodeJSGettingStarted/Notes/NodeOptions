@@ -1,0 +1,27 @@
+node -h will give a list of options (pipe to more for easier reading)
+
+some of these options such as --v8-options will reveal options for
+other systems, such as v8 in this case
+
+
+Node -h ALSO lists environment variables for node.
+-notably 
+
+NODE_DEBUG will force modules to outpur extra debugging info if they are cinfigured to do some
+NODE_PATH contains list of directories for the module search path
+
+Use these flags before node in a node call e.g.
+NODE_DEBUG node 'fileToRun'
+
+We can also pass other environment vars to a node session e.g.
+VAR1=10 STRING1="DOG" node 'fileToRun'
+
+These can then be accessed via process.env.VAR1 etc...
+(This also how we access default env variables such as USER)
+
+can also pass args to a call (like with most sh commands)
+e.g. node 'script' 1 "dog" 
+this will create a (STRING) array ["1","dog"]
+which can be accessed with process.argv in the script
+
+

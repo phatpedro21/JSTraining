@@ -1,0 +1,75 @@
+We can replace shorthand event handler calls with the 
+
+.on() method.
+
+One advantage of used .on() is that we can specify multiple events in one statement,
+useful if we want the same thing to happen for a number of different events.
+
+We do this by passing a list of events to the on function as the first param
+
+See AdvancedEvents_1.html for examples
+
+
+---
+
+We can then use .off() to remove a listener on an event.
+
+We might want to do this for the following reasons:
+-If we attach handlers from scripts that are dynamically loaded, they will be attached
+everytime the script is run (everytime refreshed), leading to duplications of handlers.
+
+-If we are introducing new, different handlers we would want to remove the old functionality
+to ensure things run as expected.
+
+
+NAMING HANDLER FUNCTIONS
+------------------------
+While we can pass anonymous functions to our .on() function,
+we may want to pass named functions. 
+This will allow us to remove handlers by name, rather than removing all handlers for an event.
+
+These functions can also be centralized in a library ensuring all code updates when the function is updated
+
+
+USING EVENT NAMESPACES
+-----------------------
+Using an event namespace we can make sure we only remove event handlers that we have added,
+those which are in our event namespace.
+
+See AdvancedEvents_3.html for examples
+
+
+DELEGATION (expanded)
+---------------------
+Simply using element.bind() will create a copy of a handler function for each selected element,
+and only assigns to currently loaded elements (not dynamicacly added).
+
+.on(eventName, selector, handler) will work like a delegate, catching events from children and firing
+the handler for them (e.g. ul, list header can listen for li, list item events). This can then work
+for dynamically added elements as the parent catched the events not the actual element.
+However, if the event has to bubble up far, there maybe timing delays etc...
+
+
+CUSTOM EVENTS
+-------------
+We can simply call $(element).trigger('customEventName') when conditions are met, and handle this event as we would 
+with any non-custom event.
+
+We can also fire custom events on objects that are not part of the DOM.
+
+
+See AdvancedEvents_4 for examples
+
+
+PASSING PARAMETERS TO EVENT handlers
+------------------------------------
+Data can be passed to a handler with the .trigger() method, or the .on method
+Data should be an array or object
+
+See AdvancedEvents_5.html for examples
+
+
+
+
+
+

@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+    <head>
+            <title>Deferred Processing 1</title>
+            <script src="http://code.jquery.com/jquery-1.7.min.js"></script>    </head>
+            <link type="text/css" rel="stylesheet" href="./DeferredStyle.css"/>
+    <body>
+
+        <input id="LoadButton" type="button" value="Load">
+        <br/>
+        <div id="Div1"></div>
+        <div id="Div2"></div>
+        <div id="Div3"></div>
+        <br/>
+        <input id="ProcButton" disabled type="button" value="Proceed">
+        <div id="Messages"></div>
+    </body>
+
+    <script>
+        $(function(){
+
+            //Creating utility function to wrap the loading functionality
+            var loadSection = function(options){
+
+                //To handle the dynamic content on another page, and only enable the proceed button once all content
+                //if FULLY loaded, we will create our own deferredObject
+                var deferred = $.Deferred(),
+                    $div;
+
+                if(typeof options !== 'object')
+                    //We can 'fail' our deferred object here if invalid option passed
+                    return deferred.reject({statusText: "Invalid Parameters, expecting object"});
+
+                options.selector = options.selector || '';
+                options.url = options.url || '';
+
+                //Check is URI is missing
+                if(options.url === '')
+                    return deferred.reject({statusText: "Missing URI"});
+
+                //Check length of selector,and continue or fail depending
+                $div = $(options.selector)
+                if($div.length > 0)
+                {
+                    //We can use load here, as we are creating our own deferred OBject
+                    $div.load(options.url, function()
+                    {
+                        deferred.resolve();
+                    });
+                }
+                else{
+                    deferred.reject({statusText: "Error in selector"});
+                }
+
+                return deferred
+                
+                
+            }
+
+            $("#LoadButton")
+
+                .on('click', function(event){
+                    
+                    //Saving our deferred object
+                    var myDefObj = $.when(     
+                        //By using content1a, we have introduced some dynamic content to our loaded content,
+                        //Previously, our handler would have enabled the proceed button only once the content was
+                        //'loaded', but it would not have waited for the loaded page to 'fully' load.                      
+                        loadSection({selector:"#Div1", url:"Content1a.html"}),
+                        loadSection({selector:"#Div2", url:"Content2.html"}),
+                        loadSection({selector:"#Div3", url:"Content3.html"}),
+                        //Testing failure with 'bad' loadSection call
+                        loadSection(),
+                        //The error message seem incorrect for this error, this is because our .fail is using the 
+                        //deferred object created by when(), which will take the value of the first failure.
+                        loadSection({})
+                    )
+                    //Ensures we are dealing with an 'unchangeable' promise, rather than full deferred object
+                    .promise()
+                    //If using .fails, may make more sense to use done, rather than then with single arg
+                    .done(function(result){
+                        myDefObj.done(function(){
+                            $("#Messages").append("EMBEDDED<br/>");
+                        });
+                    })
+                    .done(function(){
+                        $("#Messages").append("Im a second done handler!<br/>");
+                    })
+                    //Fires is when() 'fails'
+                    .fail(function(result){
+                        $("#Messages").append("Error while loading content...<br/>")
+                                        .append("Result: " + result.statusText + "<br/>");
+                    })
+                    .always(function(){
+                        $('#ProcButton').removeAttr('disabled');
+                    });                        
+                    //SOME OTHER CODE
+
+                    //Having saved our defered obj, we can now use it later in out code
+                    myDefObj.done(function(){
+                        $("#Messages").append("Some time later...<br/>");
+                    });
+                });
+
+                
+        });
+    </script>
+</html>

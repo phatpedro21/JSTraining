@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html language="en">
+    <head>
+        <title>Deferred Processing Content 3</title>
+    </head>
+    <body>
+        <div id="Content3">
+            This is content #3
+        </div>
+    </body>
+    
+<script>
+        $(function(){
+            setTimeout(function(){
+                $('#Content3').append("<hr/>") 
+                    .append("This content should not load?")
+                    //Fire a complete event (this will bubble up to our other page)
+                    .trigger('failure', {statusText:"Content3a triggered an error"});
+            }, 3000);
+        });
+    </script>
+</html>

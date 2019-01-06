@@ -1,0 +1,21 @@
+Can be considered a 'wrapper' around a VM. Node passes the JS to the 
+VM and gets the results back. It csn be thought of as a 'co-ordinator' for
+this process.
+
+Node also comes with some built in modules, making it very useful.
+
+Node also offers built in Asynchronous APIs!
+
+There is also C++ Addon support
+
+Node also has a built in package manager, NPM
+and a module dependency managerv (common JS)
+
+
+
+When using Node REPL, the .editor command
+will allow us to write multiline code easily.
+Simply type ctrl+D to exit it when done
+
+There are many other options like this. type
+.help in REPL

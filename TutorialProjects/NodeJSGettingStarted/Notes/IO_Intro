@@ -1,0 +1,9 @@
+process.stdout, process.stdin and process.stderr can all be 
+accessed.
+
+e.g. 
+
+process.stdout.write("WORDS") is the same as a console.log() line
+
+process.stdin.read() will read input
+

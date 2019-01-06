@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Events 4</title>
+        <script src="http://code.jquery.com/jquery-1.7.min.js"></script>
+        <link type="text/css" rel="stylesheet" href="./EventStyles.css"/>
+    </head>
+    <body>
+        <!--Now we have nested clickable objects... (this will show how events propagate)-->
+        <div class="clickable" id="WorkArea">
+            <h5 class="clickable">Work Area</h5>
+            <hr/>
+            <input type="button" class="clickable" value="Click Here"/>
+            <p class="clickable">Try clicking this paragraph</p>
+            <p class="clickable">and try to click the word 
+                <span class="clickable">-CLICK-</span>
+               (the second one silly)
+            </p>
+       </div>
+        <div id="Messages">
+            <h5 class="clickable">Messages</h5>
+            <hr/>
+        </div>
+    </body>
+
+    <script>
+    $(function(){
+
+        //Creating a function to handle the event messages being created
+        //Takes an options object
+        var showEventMessage = function(options){
+            //Ensures options has bare minimum values
+            options = $.extend({
+                eventType: "CLICK",
+                eventTarget: this,
+                suffix: "<br/>"
+            }, options)
+            var message = options.eventType + ": " + (options.eventTarget.nodeName || "unknown") + options.suffix;
+            $("#Messages").append(message);
+        };
+
+        //Must Remember to ensure that elements we wish to assign event handlers to, EXIST
+        //at the time of attempting to assign.
+
+        //Assign event handler to our button click
+        //Updated our handlers to accept and event argument. jquery passes the standard
+        //JS event as a parameter to handlers
+        $('.clickable')
+            .click(function(event){                
+                showEventMessage.call(this, {eventType: event.type});                        
+            })
+            .dblclick(function(event){
+                
+                showEventMessage.call(this, {eventType:event.type});
+            })
+            .mousedown(function(event){
+                showEventMessage.call(this, {eventType:event.type});
+                //adding return false to stop highlighting of clicked text, and to see effect on propagation
+                //return false;
+
+                //WE can use the stopPropagation() method to stop our event bubbling UP
+                //event.stopPropagation();
+
+                //Or the stopImmidiatePropagation to stop all other event handlers on the SAME LEVEL this one
+                event.stopImmediatePropagation();
+
+                //using jquery preventDefault() will have similar effect, but does not work exactly as returning
+                //false would...
+                event.preventDefault();
+                
+            })
+            //Chaining a second mousedown event to demo the stopPropagation and stopImmidiatePropagation methods
+            .mousedown(function(event){
+                showEventMessage.call(this, {eventType:"SECOND MOUSEDOWN"});
+            });
+    });
+    //Without any return/propagation stopping, any clicks on nexted clickables will fire more than one 
+    //event, for each 'clickable' parent of the clicked element.
+
+    //With return false, the event does not bubble up, and we only see a mousedown event message for the 
+    //'lowest' level child
+
+    //calling preventDefault (on the passed event object) doesn't 'cancel' the event like returning false does,
+    //but it does suppress default behaviour (such as highlighting text on a double click)
+    //HOWEVER preventDefault() will act differently for different browsers. 
+    //on IE which doesn't support preventDefault, preventDefault will return false instead, which as we now know,
+    //has a different outcome...
+
+    //stopPropagation only stops propagation UP the chain, any other handlers at the same level (e.g. multiple 
+    //mousedown handlers on one element) will still be called. To avoid this, we can use
+    //stopImmidiatePropagaition()
+
+
+    /*
+    A possible solution to stopping immediate propagation that works with our code but doesn't cause issues for other developers is something like
+    the following
+    
+    
+    .mousedown(function(event){
+        if(!event.isPropagationStopped() &&
+            !event.isImmediatePropagationStopped() &&
+            !event.isDefaultPrevented())
+        {
+            //Do thing
+            //showeventmessage for example
+            event.stopPropagation();
+            event.preventDefault();
+        }
+
+    })
+    .mousedown(function(event){
+        if(!event.isPropagationStopped() &&
+            !event.isImmediatePropagationStopped() &&
+            !event.isDefaultPrevented())
+        {
+            //Do other thing
+            //showeventmessage for example            
+        }
+    })
+
+    //Now other developers can add other 'same' level handlers, which will not be stopped, as only stopPropagation is called
+    //and then they can add conditional checks if they do not want to be called or want to be called in certain circumstances.
+
+    */
+
+    </script>
+</html>

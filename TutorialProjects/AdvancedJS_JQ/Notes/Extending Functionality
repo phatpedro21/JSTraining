@@ -1,0 +1,37 @@
+When extending functions/ functionality, we must take care not to 
+
+Some of the folowing methods can help us 'safely' extend functions
+
+
+Function Stubs
+---------------
+Allows us to continue to call 'legacy' code using a stub, which inturn calls newer 
+code with default values
+
+See the draw and drawNew functions in the Draw_Version2 app.
+
+
+Default values
+---------------
+Because JS doesn't enforce parameters counts, we can call a function with FEWER
+params or MORE params than expected 
+
+"missing" params will be undefined
+extra params will not be assigned to a named param, but will be accessible with the args array
+
+See Draw_Version3 for example
+
+Passing Objects
+----------------
+Instead of expecting individual values, in a particular order, we can simply Pass
+objects containing relevent values
+
+See Draw_Version4 for example, and Draw_Version4.5 for example that supports legacy
+
+
+Default Values in Objects 
+-------------------------
+When passing objects as parameters, we may want to create an exposed object to hold our
+default values, allowing us to update the default values in our code. For example in Draw_Version5
+we create our squares, then update defaults params to create rectangles, meaning we only have to 
+put in these values once, only passing position for the new rectangles.

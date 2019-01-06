@@ -1,0 +1,147 @@
+<!doctype html>
+<html>
+    <head>
+            <title>Deferred Processing 1</title>
+            <script src="http://code.jquery.com/jquery-1.7.min.js"></script>    
+            <link type="text/css" rel="stylesheet" href="./DeferredStyle.css"/>
+    </head>
+    <body>
+        <input id="LoadButton" type="button" value="Load">
+        <br/>
+        <div id="Div1"></div>
+        <div id="Div2"></div>
+        <div id="Div3"></div>
+        <br/>
+        <input id="ProcButton" disabled type="button" value="Proceed">
+        <div id="Messages"></div>
+    </body>
+    <script>
+        $(function(){
+            //Show message helper
+            var showMessage = function(options){
+                if(typeof options !== 'object')
+                    options = {message: "Param not obj", error:true};
+                
+                options.message = options.message || "No message set";                
+                options.error = options.error || false;
+                
+                $('#Messages')
+                    .append(options.error ? "Error: " : '')
+                    .append(options.message + "<br/>");
+            };
+            var loadSection = function(options){               
+                var deferred = $.Deferred(),
+                    $div, msg;
+                
+                if(typeof options !== 'object') 
+                {                   
+                    msg = "Expecting parameter object";
+                    showMessage({message:msg, error:true});
+                    return deferred.reject({statusText: msg});
+                }
+                
+
+                options.selector = options.selector || '';
+                options.url = options.url || '';
+                //Is our content going to be loading things dynamically?
+                options.dynamic = options.dynamic || false;
+                
+                //Check is URI is missing
+                if(options.url === '')
+                {
+                    msg = "Missing URI";
+                    showMessage({message:msg, error:true});
+                    return deferred.reject({statusText: msg});
+                }
+                //Check length of selector,and continue or fail depending
+                $div = $(options.selector)
+                if($div.length > 0)
+                {
+                    //We don't need to set a callback as we want to set our deferred object ourselves
+                    $.get(options.url, function(){}, 'html')
+                        .done(function(result){
+                            $div.html(result);
+                            //If no dynamic content to wait for, go ahead and resolve
+                            if(!options.dynamic)
+                                deffered.resolve();
+                            
+                        })
+                        .fail(function(result){
+                            msg="Could not load URI: " + options.url;
+                            showMessage({message:msg, error:true});
+                            deferred.reject(result);
+                        })
+                    //If expecting to wait for dynamic content
+                    if(options.dynamic)
+                    {     
+                                         
+                        //Clear our custom events from the div (incase they have been added already),
+                        $div.off('complete, failure')
+                            //handle our custom events (which are being fired from content1a and content3a local script)
+                            .on('complete', function(event){                                
+                                deferred.resolve();
+                            })
+                            .on('failure', function(event, result){                                                                
+                                msg = ("Dynamic content: " + result.statusText);
+                                $("#Messages").append(msg);
+                                showMessage({message:msg, error: true});
+                                deferred.reject(result);
+                            })
+                    }
+                }
+                else{
+                    
+                    msg = "Error in selector";
+                    showMessage({message:msg, error: true});                                
+                    deferred.reject({statusText: message});
+                }
+                //Return promise, not full deferred object
+                return deferred.promise();       
+            };
+
+            $("#LoadButton")
+                .on('click', function(event){                    
+                    //Saving our deferred object
+                    var myDefObj = $.when(
+                        //When assumes any code that doesn't return a deferred object, returns 'resolved', so continues as expected
+                        showMessage({message:"Start"}),
+                        //By using content1a, we have introduced some dynamic content to our loaded content,
+                        //Previously, our handler would have enabled the proceed button only once the content was
+                        //'loaded', but it would not have waited for the loaded page to 'fully' load.                     
+                        loadSection({selector:"#Div1", url:"Content1a.html", dynamic:true}),
+                        loadSection({selector:"#Div2", url:"Content2.html"}),
+                        loadSection({selector:"#Div3", url:"Content3a.html", dynamic:true}),
+                        showMessage({message:"End"})
+                        //Testing failure with 'bad' loadSection call
+                        //loadSection(),
+                        //loadSection({})
+                    )
+                    //Ensures we are dealing with an 'unchangeable' promise, rather than full deferred object
+                    .promise()
+                    //If using .fails, may make more sense to use done, rather than then with single arg
+                    .done(function(result){
+                        myDefObj.done(function(){
+                            $("#Messages").append("EMBEDDED<br/>");
+                        });
+                    })
+                    .done(function(){
+                        $("#Messages").append("Im a second done handler!<br/>");
+                    })
+                    //Fires is when() 'fails'
+                    .fail(function(result){
+                        $("#Messages").append("Error while loading content...<br/>")
+                                        .append("Result: " + result.statusText + "<br/>");
+                    })
+                    .always(function(){
+                        $('#ProcButton').removeAttr('disabled');
+                    });                        
+                    //SOME OTHER CODE
+
+                    //Having saved our defered obj, we can now use it later in out code
+                    myDefObj.done(function(){
+                        $("#Messages").append("Some time later...<br/>");
+                    });
+                });                
+        });
+    </script>
+</html>

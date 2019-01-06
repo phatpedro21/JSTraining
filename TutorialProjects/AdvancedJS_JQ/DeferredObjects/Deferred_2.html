@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+    <head>
+            <title>Deferred Processing 1</title>
+            <script src="http://code.jquery.com/jquery-1.7.min.js"></script>    </head>
+            <link type="text/css" rel="stylesheet" href="./DeferredStyle.css"/>
+    <body>
+
+        <input id="LoadButton" type="button" value="Load">
+        <br/>
+        <div id="Div1"></div>
+        <div id="Div2"></div>
+        <div id="Div3"></div>
+        <br/>
+        <input id="ProcButton" disabled type="button" value="Proceed">
+        <div id="Messages"></div>
+    </body>
+
+    <script>
+        $(function(){
+
+            $("#LoadButton")
+
+                .on('click', function(event){
+                    
+
+                    //We can use the when() and then() methods to handle our 'deferred processing' logic.
+                    //when() returns a deferred object to make use of later or for deferred processing
+
+                    $.when(  
+                        //We are using get() here rather than load() because load does NOT return a deferred object,
+                        //get DOES                 
+                        
+                        $.get('Content1.html', function(result){
+                            $("#Div1").html(result);
+                        }, 'html'),
+                        $.get('Content2.html', function(result){
+                            $("#Div2").html(result);
+                        }, 'html'),  
+                        $.get('Content3.html', function(result){
+                            $("#Div3").html(result);
+                        }, 'html')
+
+                        //when() 'bundles' deffered object code and returns an object when all internal are complete.
+                        //this means extending this is as easy as adding an extra like here
+                    )
+                    .then(function(){
+                        $('#ProcButton').removeAttr('disabled');
+                    })
+                });
+        });
+    </script>
+</html>

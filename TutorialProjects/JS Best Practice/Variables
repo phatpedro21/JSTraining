@@ -1,0 +1,32 @@
+With Javascript Variables, there is a behaviour known as 
+'Hoisting'
+
+Hoisting is Javascripts default behaviour of moving all declarations to the 
+top of the current scope.
+
+
+To better understand...
+
+ECMAScript Standards state 
+"A var statement declares variables that are scoped to the running execution context's VariableEnvironment. Var variables
+are created when their containing Lexical Environment is instantiated and are initialized to undefined when created"
+
+//////////////////
+
+console.log(aVariable);
+//This code would throw an error, aVariable doesnt exist
+
+////////////////////
+
+console.log(aVariable);
+var aVariable;
+//Here, we would get no error, just "undefined" printed to console
+
+////////////////////
+
+console.log(aVariable);
+var aVariable = 10;
+//This would act the same as above, printing 'undefined' to the console, even though
+//the variable has been defined now.
+
+////////////////////

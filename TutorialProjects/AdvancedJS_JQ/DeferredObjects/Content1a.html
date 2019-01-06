@@ -1,0 +1,14 @@
+<div id="Content1">
+        This is content #1
+</div>
+
+<script>
+    $(function(){
+        setTimeout(function(){
+            $('#Content1').append("<hr/>") 
+                .append("MORE CONTENT (dynamically)")
+                //Fire a complete event (this will bubble up to our other page)
+                .trigger('complete');
+        }, 5000);
+    });
+</script>
