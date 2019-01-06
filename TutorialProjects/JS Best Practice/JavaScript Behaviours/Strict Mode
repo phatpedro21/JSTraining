@@ -1,0 +1,14 @@
+StrictMode STOPS javascript to stop 'helping' where it thinks it needs to help.
+(i.e. by creating variables at global scope if we forget to define them properly in our
+function scopes (see Global Variables.txt))
+
+To 'use' strict mode we simply put the following line at the top of a script
+
+'use strict'
+
+We will then get errors for situations that SHOULD break, as javascript is no longer 
+'trying to help'
+
+We don't have to call 'use strict'in the global scope, we can call it in 
+any scope, by calling the line as the first line in that scope. E.g. we can force strict mode
+only within a new function we are developing, rather than in the entire global scope.

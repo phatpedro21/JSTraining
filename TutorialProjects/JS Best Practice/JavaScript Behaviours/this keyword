@@ -1,0 +1,99 @@
+at the most basic level
+the this keyword 'reaches' into the containing object.
+
+This allows us to pass 'functions' around that 'adjust' to their caller
+
+
+
+/* Some code for examples */
+var obj = {
+    val:"Hello",
+    printVal: function(){
+        console.log(this.val);
+    }
+};
+
+//When we call a function, the value to the left of the . is assigned to this
+
+obj.printVal() //this will be obj
+
+//if we copy printVal to a second object like so...
+var obj2 = {
+    val: "Other words"
+}
+obj2.printVal = obj.printVal;
+
+obj2.printVal() //this will be obj2
+
+//However, if we pull printVal out to a 'new' variable
+var printFunc = obj.printVal;
+
+//When we call printFunc, there is no . to check to the left of, so this will be set to 
+//the global scope, which in this case doesn't have a variable val
+printFunc() //this will be the global scope, (using strictmode will throw an error)
+
+
+We can use .bind to set a this for a function However e.g.
+var printFunc = obj.printVal.bind(obj2);
+printFunc() //this will be obj2
+
+
+
+this IN NEW OBJECT
+--------------------
+
+/*Example code to explain*/
+var object = function(){
+    this.hello = 'hello';
+    this.greet = function(){
+        console.log(this.hello);
+    }
+
+    this.delayGreet = function(){
+        setTimeout(this.greet, 1000);
+    }
+}
+
+object(); //If we were to call this, this would be set to global and 'not work'
+
+//however if we use the new keyword, the new tells us to deal with a new object, and this is 
+//set to that new object, and also implicitly adds a return to the function, to return 'this',
+//the new object.
+var instance = new object();
+
+
+//HOWEVER, if we have a callback within a function (like delayGreet), we have issues.
+//This is because the setTimeout will simply call the function assigned to this.greet,
+
+//e.g. 
+    greet();
+
+//and we will have the issue where 'this' is the global scope
+
+//To override this we could set delayGreet up in the followign ways
+
+//1. (not desirable)
+    setTimeout(object.greet.bind(this),1000);
+//Which will ensure this is set to the current object, as we'd expect
+
+//2. (better to use this way)
+    //add a variable to object
+    _this = this;
+
+    //and define delay greet as
+    setTimeout(_this.greet, 1000)
+
+    //And here, we are calling a specific instances greet, and this will be 
+    //pointing at the expected thing.
+//
+
+
+
+
+
+
+
+
+
+
+

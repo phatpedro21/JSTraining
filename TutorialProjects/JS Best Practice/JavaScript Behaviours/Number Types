@@ -1,0 +1,16 @@
+In JavaScript, numbers starting with a 0 are assumed to be OCTAL
+(We might start numbers with 0 otherwise to line up code e.g.
+
+    x = 120
+    y = 014
+
+)
+
+In the above example, x+y would be 132 not 134 (as 014 in octal is 12)
+
+0x defines hexadecimal
+
+HOWEVER, if we turn strictmode on, starting a number with 0 will throw an 
+error, not assume to be octal, in this case we should use 
+
+parseInt(number, base(8 for octal));
