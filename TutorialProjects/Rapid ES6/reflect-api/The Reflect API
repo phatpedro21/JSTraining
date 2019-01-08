@@ -140,3 +140,14 @@ Where:
 
 (This prevents us from adding new properties to an object)
 
+--
+
+Reflect.isExtensible(target)
+
+Where:
+
+    target: Target object check extension on
+
+(Returns true or false)
+
+

@@ -56,3 +56,32 @@ trapsConfig is an object literal that defines our Traps
 CALLING FUNCTIONS BY PROXY
 ----------------------------
 We can also wrap functions in a proxy, using the same Proxy set up method, simply by passign a function as the target
+
+
+
+USING A PROXY AS A PROTOTYPE
+----------------------------
+One interesting possible use of Proxies is to set them up, initially on empty objects...
+
+            let loggerProxy = new Proxy({}, {//Trap Set Up});
+
+Here we can set up a proxy that handles some standard proxy behaviour, perhaps a logger proxy which logs which functions are used regularly.
+
+We can then use 
+
+            Object.setPrototypeOf(newObject, loggerProxy);
+
+whenever we want to wrap new objects in a proxy
+
+
+
+REVOCABLE PROXIES
+-----------------
+When we create proxy and hand it off externally for use, it will exist for potentially forever, we may need to 
+revoke access to a proxy when situations change. 
+
+We can call Proxy.revocable  to create a revokable proxy.
+
+Proxy.revocable() returns an object containing our proxy object ,and a revoke method.
+
+So we should hold onto the revoke function and we can call it later, and 'shut down' use of the proxy.
