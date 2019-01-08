@@ -1,0 +1,33 @@
+Iterators allow us to 'iterate' through sets of data.
+
+
+An Example...
+
+    Arrays have an iterator, accesible by 
+
+            let myArray = [60,65,70];
+            //myArray's iterator
+            let iterator = myArray[Symbol.iterator]();
+
+    On this iterator we can call next, which will 'step' through the array and return an object
+    with the value of the next element, and a flag to tell uss if we have reached the last element or not
+
+            iterate.next()   //Returns {done:false, value:60}
+            iterate.next()   //Returns {done:false, value:65}
+            iterate.next()   //Returns {done:false, value:70}
+            iterate.next()   //Returns {done:true, value:undefined}
+
+
+------- 
+We can Create our own iterators for our own objects
+
+To do this we simply need to follow the example of array iterator
+    Create a function called [Symbol.iterator]
+        which returns an object with a next function, which inturn
+        returns an object with our value and done state.
+
+
+-------
+for...of loops make use of iterators,
+so does the ...spread functionality
+

@@ -1,0 +1,20 @@
+We now have access to hyperbolic functions e.g.
+hypot()
+cosh()
+acosh()
+sinh()
+tanh()  etc...
+
+
+new arithmatic functions e.g.
+cbrt()  -cube root
+clz32() -count leading zeros
+log2()  -log base 2
+imul()  -32bit integer multiplication
+
+
+and also
+
+sign()      -returns 'sign' of number
+trunc()     -intger part of a number
+fround()    -round to nearest 32 bit floating point value

@@ -1,0 +1,5 @@
+The 'values' exported by a module are read only (but only at the 'first level', e.g. properties on an object can
+be changed)
+
+When we import and export, we simply get the 'name' of that variable, so any changes to that object (either inside the module or externally)
+are 'persistant' and will reflect when we next call on that variable

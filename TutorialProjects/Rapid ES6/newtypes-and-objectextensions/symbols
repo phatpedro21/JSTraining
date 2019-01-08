@@ -1,0 +1,61 @@
+Symbols is a new 'object' in ES6
+
+a symbol is...
+
+    - A unique and immutable data type and may be used as an identifer for object properties
+
+
+symbols should not ever be 'delved into' or controlled by the developer
+
+We should create a symbol and store the saved symbol to a variable
+                            //This string is mainly for debugging
+    let eventSymbol = Symbol("resize event");
+
+    eventSymbol.toString()  //Will simply show us the original debug string we sent in, it will not give us
+                            //any other details about the symbol.
+
+
+Everytime we create a new symbol, even with the same 'debug string' we will get a new, unique symbol
+
+    let s1 = Symbol("event");
+    let s2 = Symbol("event");
+
+    s1 === s2       //Will return false, s1 and s2 will be unique and different
+
+To get an already registered Smybol we use                          Symbol.for('debug string');
+
+To get the debug string from and already created Symbol, we use     Symbol.keyFor(symbolObject);
+
+
+WHERE ARE SYMBOLS USEFUL?
+---------------------------
+It can be useful for creating object properties on objects,
+
+e.g. we can setup a symbol at the start of our code, and then use Symbol.for('propertID') to assign and reference properties
+
+        //create a symbol
+        let importantProperty = Symbol("importantProp");
+
+
+        //create new object which will have an important property
+        let object = {
+            name:"an Object",
+            [Symbol.for("importantProp)]: 100;
+        }
+
+        //Now, we simply need to know we are looking for an important property, and we can access it, without needing to know
+        //exactly what it is called etc...
+
+        console.log(object[Symbol.for("importantProp)]);
+
+
+
+getOwnProperties() will ignore symbol defined properties
+
+use 
+
+getOwnPropertiesSymbols() to see symbol defined properties
+
+
+
+        

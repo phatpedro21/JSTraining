@@ -1,0 +1,30 @@
+DEFAULT PARAMS
+--------------
+
+Like in C++, C# etc... we can define default values for functions in ES6
+
+e.g.
+
+let defaultParamsFunc = function(user="Default", colour="Red", number=1)
+{   
+    console.log('Hello ${colour} ${user} : ${number});
+}
+defaultParamsFunc(); // will output "Hello Red Default : 1"
+
+
+We can pass undefined to tell our function to use the default values
+defaultParamsFunc("Peter", undefined, 3); // will output "Hello Red Peter : 3"
+
+
+We can also access other params from our default params (aswell as global variables, and functions)
+e.g.
+let defaultParamsFunc2(number, magicNumber=number*3){
+    console.log("num: " + number + " | mNum: " + magicNumber);
+}
+defaultParamsFunc2(3); //will print "num: 3 | mnum: 9"
+defaultParamsFunc2(3,5); //will print "num: 3 | mnum: 5"
+
+
+arguments. (which should be avoided) will only contain passed arguments, not default defined ones.
+
+Default arguments can even be used when creating dynamic functions

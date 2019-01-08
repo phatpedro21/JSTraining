@@ -1,0 +1,30 @@
+Sets (and weaksets) are just like Maps(and weakmaps) Except they deal with individual items, not key value pairs
+and we use Sets to ensure all items  are unique
+
+Examples
+
+    let perks = new Set();
+    //Constructor can also take an iterator
+
+    perks.add("New Car");
+    perks.add("Health Insurance");
+    //Attempting to add a duplicate will be ignored
+    perks.add("New Car") //size will still be 2, because this would be a duplicate and is not added
+
+    console.log(perks.size)     //will print 2
+
+
+    .has() returns true or false if passed value exists in the Set
+
+    .keys(), .values() will simply return the Set
+
+    .entries() will return the set but duplicated (e.g.  New Car, New Car  Health Insurance, Health Insurance)
+
+    (THE Value is treated as both the key and the value)
+
+
+BEAR IN MIND THAT TWO Different objects, with the same values will both be allowed to exist, as they are still 'unique' objects
+
+
+
+- A WeakSet must contain objects

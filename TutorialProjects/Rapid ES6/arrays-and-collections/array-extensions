@@ -1,0 +1,86 @@
+Array.of()
+-----------
+
+In ES5, calling Array() with just one, numeric value, will create an empty array of the same length as the passed number,
+ES6 adds Array.of() to ensure that in this case (where we would probably expect an array with one element, the passed number)
+
+    so...
+            let array = Array.of(2930);
+            
+            //array is [2930]
+
+
+Array.from()
+-------------
+Array.from() creates a new array from an array, but passing each element into a function first.
+
+        e.g. to add 100 to each element of an array and save to a new array
+
+            let array = [10,20,30];
+
+            let arrayPlus100 = Array.from(array. val => val+100);
+
+            //arrayPlus100 will equal [110,120,130];
+
+We can also pass an object as the third parameter, which can be accessed via this in the function
+
+
+
+Array.fill()
+-------------
+Fills all elements of an array with a specified values
+
+Second (optional) value passed tells us which index to start filling from,
+
+Third (optional) value passed tells us which index to stop filling at (non inclusive),
+
+(Like in python, negative values mean, "from the end")
+
+
+Array.find()
+-------------
+find() is passed a function and will return element that fulfil 'true' from the function (e.g. to find elements greater than 500)
+FIND Only returns the first instance that fulfils the condition
+
+
+Array.findIndex()
+-------------------
+This operates the same as find, but returns the index rather than the element
+
+find and findIndex allow us to pass 
+    value (current value)
+    index (current index)
+    array (entire array being looked at)
+
+into the function passed to them
+
+
+
+Array.coptWithin()
+------------------
+this will copy values from within the array, to elsewhere in the array
+takes arguments
+
+    (startReplacing, startCopying, numberToCopy)
+
+    startReplacing specifiys where to start overwriting from
+
+    startCopying specifies where to start reading values from (to overwrite)
+
+    numberToCopy specifies how many values to copy/overwrite
+
+
+
+.entries()
+----------
+Returns index value pairs of each element in an array
+
+.keys()
+----------
+returns only the index's from an array
+
+.values()
+---------
+returns only the values from the array
+
+

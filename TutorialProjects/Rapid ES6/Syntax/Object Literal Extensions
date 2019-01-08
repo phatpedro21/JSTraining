@@ -1,0 +1,46 @@
+DEFINING PROPERTIES OF AN OBJECT
+-----------------------------------
+
+In ES6 we do not need to repeat a name when defining a property
+ e.g. we used to have to do
+
+ var name="Peter", number=23;
+ var product{
+     name:name,
+     number:number
+ }
+
+NOW we can shorthand to 
+
+var product{
+    name,
+    number
+    //Can also shorthand define functions like so
+    printProduct() {
+        console.log(name + " : " + number);
+    }
+}
+
+-We can also use a string literal as an object name
+ And we can also use the [] to use and expression as a property name
+
+var name = "VarName", number=123;
+
+var anObject = {
+    "long name with spaces": 45,
+
+    //Will set a property named VarName-123
+    [name + "-" + number]: 123,
+
+    //also works for functions
+    "function name"(){
+        //do thing
+    }
+
+
+
+}
+
+HOWEVER if these names have spaces they must be accessed using [] also like...
+
+console.log(anObject["long name with spaces"]);

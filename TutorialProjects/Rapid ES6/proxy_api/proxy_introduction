@@ -1,0 +1,58 @@
+A Proxy is an object that wraps another object or function and allows us to monitor access to these objects.
+
+This can allow us to monitor our code for security, logging, etc.. seeing how long functions take to run etc..
+
+
+WHAT ARE PROXIES
+-----------------
+
+Start with a target object or function.
+Perhaps this target have some secure information / functionality which we want to 'protect' from other developers
+
+We can wrap this target in a handler (known as the proxy)
+
+The handler will have traps, which intercept access to the Target.
+
+e.g. a get/set trap will step in before the call gets to the Target and validate, log etc...
+
+
+
+PROXY TRAPS
+-----------
+Within the Proxy API we have the following traps
+
+handler.construct()         
+handler.apply()             
+handler.getPrototypeOf() 
+handler.setPrototypeOf()   
+handler.get()
+handler.set()
+handler.has()
+handler.ownKeys()
+handler.defineProperty()
+handler.deleteProperty()
+handler.getOwnPropertyDescription()
+handler.isExtensible()
+handler.preventExtensions()
+
+There are some things that cannot be trapped ...
+e.g. 
+
+Use in comparions, typeOf / instanceOf
+
+
+
+SETTING UP A PROXY
+------------------
+
+new Proxy(target, trapsConfig)
+
+target it the object we want to wrap in our Proxy
+
+trapsConfig is an object literal that defines our Traps
+
+
+
+CALLING FUNCTIONS BY PROXY
+----------------------------
+We can also wrap functions in a proxy, using the same Proxy set up method, simply by passign a function as the target

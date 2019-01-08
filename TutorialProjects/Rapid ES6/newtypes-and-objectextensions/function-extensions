@@ -1,0 +1,17 @@
+Functions have been given a name property which will return the name of a Functions
+examples...
+
+
+        let fn = function calc()
+        {
+            //things
+        }
+        //fn.name will equal "calc"
+
+        let fn = function{
+            //things
+        }
+        //fn.name will equal "fn"
+
+
+-Function.name  is NOT writable, but it is configurable with Object.defineProperty()

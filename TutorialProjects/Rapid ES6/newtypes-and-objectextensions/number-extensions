@@ -1,0 +1,24 @@
+many global functions are now being moved into Objects, so
+
+parseInt, parseFloat etc... all belong to Number
+
+
+Most have same functionality but some are slightly different
+
+
+e.g. isNaN and isFinite would try to parse strings into ints first,
+
+    Number.isNaN and Number.isFinite will now return false if passed a string
+
+
+
+Number.isInteger() is new,
+
+Number.isSafeInteger is also new and checks if a number can be represented in floating point form without losing precision
+
+
+New Constants
+
+Number.EPSILON
+Number.MAX_SAFE_INTEGER
+Number.MIN_SAFE_INTEGER

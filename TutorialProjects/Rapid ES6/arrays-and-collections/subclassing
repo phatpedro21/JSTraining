@@ -1,0 +1,30 @@
+Subclassing allows us to extend existing objects/primitives
+
+
+For example we can extend Array
+
+        class Perks extends Array{
+
+        }
+
+        let a = Perks.from([5,10,15]);
+
+        (a instanceOf Perks) //Returns true
+
+        (a.length)           //3 as expected, as we are using Arrays fucntionality
+
+
+-Even if we call Array functions that return an 'array', if we call them on a subclass, we get that subclass back
+
+        e.g. 
+
+        //a, which is a subclass, calling reverse, which belongs to Array and usually returns an array, will return a Perk 
+        let newArray = a.reverse();
+
+        (newArray instance of Perk) //Will return true
+
+
+
+Subclassing is useful because we can add our own required functionality.
+
+    .e.g. we can add a sum() function to our array subclass to add up all elements of an array easily.

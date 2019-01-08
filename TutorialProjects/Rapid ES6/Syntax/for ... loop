@@ -1,0 +1,7 @@
+The for...loop allows us to quickly loop through an iterable
+
+using the form 
+
+for (let itemName of listOfItems){
+    //Do something with itemName
+}

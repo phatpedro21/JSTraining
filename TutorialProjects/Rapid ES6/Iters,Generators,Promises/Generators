@@ -1,0 +1,55 @@
+Generators are able to 'yield' execution and be returned to later. We use iterators to return back to our generators.
+
+
+
+To declare a generator we prefix the function name with a '*'
+
+        function *genProcess(){
+
+            //We can do normal function steps in here, but we also have access to the yield key word
+            yield 100;
+            yiels 101;
+        }
+
+        //When we call a generator, we are returned an iterator, and our generator 'starts' in a paused state
+        let genIter = genProcess();
+
+        //We then call next on the iterator to perform the 'next' step of the generator
+        console.log(genIter.next())     //This prints   {done:false, value:100}
+        console.log(genIter.next())     //This prints   {done:false, value:101}
+        console.log(genIter.next())     //This prints   {done:true, value:undefined}
+
+
+As they use iterators, we can do for...of on a generator.
+
+We have to call the function to do this e.g.
+
+        for ( result of generator() ){};
+
+
+-------------------------------
+
+The yield keyword is essentially a 'slot in the wall'. When a yield is encountered, it can pass a value back to the controlling code, and IF
+we pass values into the next call to the generator, the yield will be replaced with the value!.
+
+
+
+-------------------------------
+We can 'recursively' iterate/generate. 
+
+    For example if we have a generator
+
+            function *arrayReturner(){
+                //yield [1,2,3]  would simply return the entire array at the first yield
+
+                //Adding an * however, 'delegates' iteration, replacing the current iterator with the 'object' iterator
+                yield* [1,2,3]
+            }
+
+            //SKIPPPING STEPS FOR GETTING OUR GENERATORS ITERATOR
+
+            arrayReturnerIterator.next();   //returns 1
+            arrayReturnerIterator.next();   //returns 2
+            arrayReturnerIterator.next();   //returns 3
+            arrayReturnerIterator.next();   //returns undefined
+            

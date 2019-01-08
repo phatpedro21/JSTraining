@@ -1,0 +1,45 @@
+setPrototypeOf()
+-----------------
+We can assign protoypes (esentially tell an object to inherit from another) at anytime using
+
+Object.setPrototypeOf(child, parent)
+
+
+assign()
+---------
+assign will populate a target with the properties of any other object that has been passed
+
+            let a={a:1, c:19}, b={a:3,b:6};
+            
+            let target = {};
+
+            //Will populate target with the values of a and b (later args will overwrite earlier args in case of same named properties)
+            Object.assign(target, a, b);
+
+            //target will then be {a:3, c:19, b:6}
+
+-Non enumerable properties will be ignored
+-assign only looks directly at passed objects, and will not look into prototypes for their properties
+
+
+
+
+is()
+-----
+Object.is()  is very similar to '==='
+
+However, it solves issues where
+
+            let amount = NaN;
+            console.log(amount === amount)          //This would return FALSE, which may be unexpected
+            console.log(Object.is(amount,amount))   //Returns TRUE here 
+
+
+            AND 
+
+            let val1 = 0, val2 = -0;            
+            console.log(val1 === val2)              //This would return TRUE, which may be unexpected
+            console.log(Object.is(val1,val2))       //Returns FALSE here 
+
+
+

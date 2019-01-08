@@ -1,0 +1,45 @@
+ES6 adds 'classes', but these are essentially syntaxctic sugar over the existing constructor functions etc...
+
+
+
+/*Code example for explanation*/
+
+//Use class keyword to define a class
+class Task{
+
+    constructor(){
+        //do constructor things
+    }
+    //Can define methods on the class
+    showId(){
+        console.log('99');
+    }
+}
+
+//create instance of class with new
+let task1 = new Task();
+
+
+console.log(typeof Task);               //Prints 'function' (classes are just 'wrapper' for constructor functions)
+console.log(typeof task1);              //Prints 'object'
+console.log(task1 instanceof Task);     //Prints 'true' (recognises instnaces of constructor)
+
+
+-Methods added to classes are added to the prototype of an object
+-Cannot declare variables within a class body (do so in the constructor)
+-Classes are not hoisted, so need to be defined before Use
+-Classes can be assigned to variables
+        e.g.
+        let aClass = class Class1{
+            constructor(){
+                //blah
+            }
+        }
+
+        new aClass(); //Will create a new Class1
+-Classes don't get placed into the 'global' object
+
+
+
+There is a default constructor that is added to extended classes which simply taks all args and passes them straight to 
+super();

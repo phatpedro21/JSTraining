@@ -1,0 +1,19 @@
+Throw and Return give us better control over generators...
+
+
+throw()
+--------
+
+If we call throw() instead of next() on our generator Iterator, we are throwing an exception, so if our generator
+has exception handling (try/catch) the catch block will be executed.
+
+If we do not have a catch for a thrown exception, execution will terminate (as an unhandled exception occurs)
+
+
+return()
+---------
+to 'neatly' clean up a generator we can use .return(), which will set the iterator objects done to true, and return the value we pass
+
+        e.g.
+
+                generatorIterator.return("foo"); //returns {value:"foo", done:true}

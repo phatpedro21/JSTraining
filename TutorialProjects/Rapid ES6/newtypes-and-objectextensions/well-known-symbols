@@ -1,0 +1,30 @@
+There are some symbols used for meta-programming.
+
+Some of these symbols allow us to do some interesting things with ES6
+
+
+For example, when calling toString on and object, get an unhelpful '[object Object]
+
+However, using a well known symbol, toStringTag we can give some meta information to an object.
+
+    myObject.prototype[Symbol.toStringTag] = "myObject Class";
+
+    //This will tell toString() to print   [object myObject Class]
+    //Which is more useful.
+
+
+
+Another wellknown symbol is Symbol.isConcatSpreadable which can be set on arrays, this will stop concat from 
+'spreading' out a concatenated array 
+                        from    [1,2,12] -> [1,2,12]
+
+and instead tell concat to do
+                                [1,2,12] -> [[1,2,12]]
+
+
+
+
+Or Symbol.toPrimitive will tell javascript what to do when performing exprressions on 'mismatching' types?
+
+
+SEE MDN FOR ME DETAILS ON WELL-KNOWN SYMBOLS
