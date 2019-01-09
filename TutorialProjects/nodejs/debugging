@@ -1,0 +1,18 @@
+Node has a built in debugger, although it is not the most powerful,
+
+it does however link in very well with chrome developer tools
+
+
+
+run a code with 
+
+    node --inspect 
+or
+    node --inspect-brk      (brk here means break, so not expectign to run anything yet)
+
+
+If we then go to url
+
+        chrome://inspect
+
+We should see our node process and will be able to inspect it with chromes poweful dev tools

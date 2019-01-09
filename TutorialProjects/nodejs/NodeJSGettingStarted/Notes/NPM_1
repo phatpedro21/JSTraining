@@ -1,0 +1,85 @@
+NPM is Nodes Package Manager
+
+NPM ALLOWS US TO
+-Share code with others
+-Reuse our own code across our other projects
+-Use code that others have shared
+
+
+A package is a 'folder' that contains code that can be run by Node
+
+
+package.json
+--------------
+This file is very important for a number of reasons. One of these is to keep track of the dependencies needed (installed by npm)
+
+This file is usually edited by npm automatically, but made need some manual changes.
+It contains 
+    -The name of the package
+    -Version
+    -Dependencies       -When we install other packages, they will be updated and included here
+
+    -DevDependencies    -This are dependencies that are needed for development (e.g. testing libraries etc...)
+                         that are not needed in production
+
+
+Package-lock.json will contain the 'versions' that were installed at the time of the original install. So if another person were to try and
+install packages while trying to work on your code, they would not get any newer versions that may have since been released.
+
+
+
+NPM CLI COMMANDS
+----------------
+
+init        -       Will set up a package.json file and perform other set up for a new node project.
+
+install (i) -       this will install a package from the npm repository (by default) and save it in 
+                    a special folder called node_modules folder. It will also install any packages the the 
+                    one we are trying to download depends on.
+
+                    WITHOUT arguments, this command will install any required packages as per the package.json 
+                    dependencies list
+
+                    -D will install a package as a dev dependency
+
+                    -g will install a package globally 
+
+
+SEMANTIC VERSIONING
+-------------------
+npm uses Semantic Versioning (SemVer) to describe versioning of packages.
+
+this follows the pattern
+
+                   Major        .           Minor           .        Patch
+            (Breaking Change)       (Backward Compatible)         (Bug fixes)
+            e.g. 
+
+            3.4.1  (major changes:3, minor changes:4 (since last major), Patches: 1 (since last minor))
+
+Other special characters mean other things
+
+~   tells npm it can install the latest patch version
+
+^   tells npm it can isntall the lastest minor version
+
+Could also use  4.x notation (anything starting 4.)
+
+
+
+
+PUBLISHING A PACKAGE
+---------------------
+NPM will look for an index.js file in the package.
+
+Once we have completed a package we would like to PUBLISHING
+the package name must be UNIQUE
+
+Must then login to npm ('npm login' in the terminal)
+    
+Ensure the package folder has a package.json (npm init)
+
+Then simply call npm publish
+
+
+

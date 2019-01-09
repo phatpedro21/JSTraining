@@ -1,0 +1,13 @@
+The events library is a very important built in aspect of Node, and many other modules 
+implement event emitters
+
+
+Emitters can 
+
+    .emit(string)           -This will emit a string, which will be a name used to identify and event
+
+
+    .on(string, callback)   -This will tell an emitter to evoke the callback, everytime the event represented
+                             by the string is fired
+
+                            -this can be called multiple times, allowing us to attach many functionalities to a single event

@@ -1,0 +1,42 @@
+NPX
+----
+NPX allows us to 'call' locally installed packages from within a project as 
+if they are global.
+
+E.g if we have eslint installed locally to a package, but we need to configure it, instead 
+of installing it globally too and running it we can simply call
+
+npx eslint --init 
+
+
+
+NPM SCRIPTS
+-------------
+NPM scripts allow us to standardise certain functionality when starting/testing/etc...
+our projects.
+
+they are defined in the package.json and we can then call them with 
+npm run 'scriptname'
+
+And whatever script we have defined will be run
+
+
+NPM UPDATES
+------------
+We can call
+npm ls  - to see the currently installed versions of packages.
+
+npm show packageName versions   - will show all available versions of a given package
+
+npm outdated    - Will show the difference between current versions, latest versions and what version
+                  will be updated to (the wanted column) for our packages
+
+npm update      - Will update all packages to the latest version allowed by the semantic versioning
+                  defined in package.json
+
+When installing, using @ after the package name allows us to specify a version to install.
+e.g.
+
+npm install express@1.0.0  - will install version 1.0.0 of express
+npm install lodash@latest  - will install latest version of lodash
+

@@ -1,0 +1,22 @@
+In Node, there is a Global object, which is accessible via 
+
+    global.
+
+
+Many things we do such as 
+    setTImeout()
+are simply shorthand for
+    global.setTimeout()
+
+global is the only 'concept' of global in node.
+
+While it is not advised, we can add to or change global values like follows
+e.g.
+
+    global.petesGlobal = 101;
+
+and these can be accessed by
+
+    petesGlobal
+
+BUT REMEMBER, DO NOT CREATE OR CHANGE GLOBAL VARIABLES!

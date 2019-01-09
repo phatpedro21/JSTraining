@@ -1,0 +1,11 @@
+In this example folder we see demonstrations of...
+
+Creating and Publishing a package to NPM 
+- See NPM_1.txt for details
+- ptrmly-frame-print contains the package
+- myproject/main.js required our package
+
+
+NPM Start Scripts
+- Here we add some 'scripts' to the scripts section of the package.json
+- 

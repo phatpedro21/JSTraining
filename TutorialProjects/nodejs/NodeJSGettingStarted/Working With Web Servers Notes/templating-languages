@@ -1,0 +1,10 @@
+Templating languages save us a lot of time concatenating strings etc...
+
+
+Some of the popular tempalting languages are
+
+    -pug (formerly jade)
+
+    -handlebars
+
+    -EJS

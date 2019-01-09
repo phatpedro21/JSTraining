@@ -1,0 +1,8 @@
+Errors are problems, which an application shouldn't really catch, and should
+be allowed to just 'happen'
+
+Exceptions are 'condtions' which we should be catching and handling
+
+
+We can define and catch exceptions to allow code to continue without crashing out 
+if we encounter a 'possible, identified' issue.

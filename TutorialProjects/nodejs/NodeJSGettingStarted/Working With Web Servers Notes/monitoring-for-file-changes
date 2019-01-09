@@ -1,0 +1,7 @@
+There are a number of packages/tools that will monitor our code base for changes,
+and autimatically restard node to reflect these changes, saving us a lot of hassle.
+
+
+Some examples
+- nodemon
+-
