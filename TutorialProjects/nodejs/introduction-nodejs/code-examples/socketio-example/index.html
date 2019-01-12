@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="/socket.io/socket.io.js"></script>
+        <title>socketio</title>
+        <script type="text/javascript">
+            var socket;
+            function onload(){
+                socket = io.connect();
+                socket.on('timer', function(data){
+                    document.getElementById("timer").innerHTML = data;
+                });
+            };
+            function submitData(){
+                var data = document.getElementById("inputData").value;
+                socket.emit("submit", data);
+            }
+        </script>
+    </head>
+    <body onload='onload()'>
+        <h1>socket page example</h1>
+        <p>Timer: <span id="timer"></span></p>
+        <form action='#'>
+            <p>Data: <input type="text" id="inputData"/>
+            <input type="button" value="submit" onclick="submitData()"/>
+            </p>
+        </form>
+    </body>
+
+</html>
