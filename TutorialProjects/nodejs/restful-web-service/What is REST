@@ -1,0 +1,18 @@
+REST stands for 
+    - Representational State Transfer
+
+Rest is a series of rules on a server to explain how interactions with the server should work:
+
+These rules/constraints are:
+    -Client Server : client sends request, server sends response
+    -Stateless Server : in instances with multiple 'server instances' information about a client may not be 
+                        accesible in other instances so ALL INFORMATION NEEDED FOR A REQUEST, SHOULD BE IN THE REQUEST
+    -Caching :  Lets client know how long to assume data will stay the same for, to avoid requesting same information over and
+                over again
+
+    -Uniform Interface : The components of the interface
+                            - Service should deal with Resources (not actions)
+                            - HTTP Verbs will define what we do with a resource (GET, POST, DELETE)
+                            - HATEOS (Hypermedia as the Engine of Application State) 
+                                each request will contain a set of hyperlinks, defining what we can 'do from here'
+                            
