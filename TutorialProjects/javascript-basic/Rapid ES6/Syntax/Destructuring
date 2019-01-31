@@ -1,0 +1,65 @@
+Destructuring involved 'breaking down' and object into components.
+this could be an array, string etc...
+
+(think python tuple expansions)
+
+e.g.
+
+let results = ['200', '335', '456'];
+let [first, second, third] = results; //This will pull each value of results into a variable
+
+console.log(first);     //prints "200"
+console.log(second);    //prints "456"
+
+
+If there is a missing value, any remaining variables expectin a value are set to undefined
+AND we can pass defaults
+e.g. 
+let [a, b, c, d, e="999"] = results;
+
+console.log(d)  //prints undefined;
+console.log(e)  //prints "999";
+
+We can skip values with consecutive commas 
+e.g.
+let [a,,b] = results;
+
+console.log(b)  //prints "456" 
+
+
+We can use a rest parameter to return remaining elements into an array
+e.g.
+
+let [a, ...b] = results
+
+//a will = "200"
+//b will = ["335", "456"]
+
+
+Destructuing can be done recursively, and variables to pull into can be defined previously
+e.g.
+
+let values = [12, 14, [10, 19]];
+
+let a, b, c1, c2;
+
+[a, b, [c1, c2]] = values;
+
+//a = 12
+//b = 14
+//c1 = 10
+//c2 = 19
+
+
+Destructuring can also be done in the parameter definition of a function
+
+DESTRUCTURING OBJECTS
+----------------------
+
+For objects, the approach is exactly the same, except we use { } instead of [ ]
+
+(SOMETHING TO WATCH OUT FOR)
+If we predefine our variables when trying to destructure an object, we show wrap the 
+destructuring line in ( ) otherwise we may throw errors
+
+

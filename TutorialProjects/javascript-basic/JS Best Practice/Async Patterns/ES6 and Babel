@@ -1,0 +1,13 @@
+Before using async - await (coming/added in ES7) we should discuss using babel to allow us 
+to write nicer code now, and transpile to other versions
+
+for example, we should use the 
+
+let  keyword, which is a ES6 feature, 
+
+however we may need to operate on ES5 'systems'
+
+so we can use babel to take out code, written well in ES6 and 'transpile it'
+into ES5 for use elsewhere
+
+(Same can be done to convert ES7 down to ES6 while it is unsupported)

@@ -1,0 +1,15 @@
+If we forget to prefix a new variable creation line with 'var'
+
+e.g. 
+
+newVar = 12;
+
+instead of 
+
+var newVar = 12;
+
+
+Javascript will 'step up' scope to find it, and if the global scope doesn't 
+find it, it will create one for us (like it sometimes automatically inserts semicolons).
+This will lead to some unexpected behaviours, such as variables we expect to be 
+'encapsulated' actually being globally accessible.

@@ -1,0 +1,53 @@
+Template literals allow us to interpolate strings and add variables 
+directly into strings
+
+We need to wrap our 'string' with backticks (`);
+
+and insert variables with ${variableName} (WE ARE ALSO ABLE to have expressions within the 
+variable 'input')
+
+
+e.g.
+
+var number = 12, name = "Peter";
+console.log(`Hello ${name} : ${number}`)  //will output "Hello Peter : 12";
+
+The backticks (defining a template literal) formatting is preserved so...
+
+console.log(` AB
+CD
+EF`)
+
+Will output
+AB
+CD
+EF
+
+
+
+
+
+TAGGED LITERALS
+---------------
+
+prefixing a template literal with a functions call (excludign the brackets)
+
+The function will then be passed an array of the 'individual' string segments of 
+the passed literal, followed by a rest param array of the 'referenced' variables in the string
+
+e.g.
+
+function processInvoice(segments, ...values){
+    console.log(segments);
+    console.log(values);
+}
+
+let invoiceNo = 1232;
+let amount = 2300;
+//Calling a tagged literal
+processInvoice `Invoice: ${invoiceNo} for £ ${amount}`;
+
+
+And processInvoice will return
+["Invoice: ", " for £ ", ""] //segments
+[1232, 2300] //values

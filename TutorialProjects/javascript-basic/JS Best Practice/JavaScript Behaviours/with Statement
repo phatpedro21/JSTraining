@@ -1,0 +1,24 @@
+the with keyword (used to make accessing nested variables easier) is considered
+depreciated and should not be used 
+
+(Example use
+
+    var obj = {
+        a:{
+            b:{
+                c:"Hello
+            }
+        }
+    }
+    with(obj.a.b){
+        console.log(c);
+    }
+)
+This had a number of issues arising around uncertainty of what a varible was pointing at
+in circumstances, so is advised to not be used
+
+SO to access nested variables in a better way we can use IIFE'like so
+(function(Object){
+    console.log(newVar)
+}(obj.a.b.c))
+

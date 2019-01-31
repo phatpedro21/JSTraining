@@ -1,0 +1,153 @@
+The REFLECT API opens up one object ,which allows us to perform many operations we tend to with Javascript.
+
+E.g 
+
+There are many ways to callcreate a class, call a method etc...
+
+With Reflect we can do them all via Reflect.
+
+
+Before we can work with Proxy API we need to udnerstand the reflect API.
+
+
+OBJECT CONSTRUCTIONS
+--------------------
+                
+Reflect.construct(target, argumentsList [, newTarget])
+
+Where:
+    target : the function we want to construct
+    argumentsList : array of arguments to pass to the target constructor
+
+    newTarget (optional): defines the new.target value
+
+
+
+ CALLING FUNCTIONS/METHODS
+ -------------------------
+
+ Reflect.apply(target, thisArgument, argumentList)
+
+ Where:
+    target: function we want to call
+    thisArgument: what this points to
+    argumentList: array of arguments
+
+
+
+PROTOTYPES
+-----------
+
+Reflect.getPrototypeOf(target)
+
+Where:
+    target: is what we want the prototype of
+
+--
+
+Reflect.setPrototypeOf(target, prototype)
+
+Where:
+    target: is what we want to set the prototype of
+    prototype: is the prototype we wish to set targets prototype to
+
+
+
+PROPERTIES
+----------
+
+Reflect.get(target, propertyKey [, receiver])
+
+Where:
+    target: Target object to get property from
+    propertyKey: Key of the property to get
+
+    receiver (optional): In the case of propertyKey being a getter, defines an object to get the value from
+                            essentially what this points to in the getter
+
+--
+
+Reflect.set(target, propertyKey, value, [, receiver])
+
+Where:
+    target: Target object to set property on
+    propertyKey: Key of the property to set
+    value: The value to assign
+
+    receiver (optional): In the case of propertyKey being a getter, defines an object to get the value from
+                            essentially what this points to in the setter
+
+
+--
+
+Reflect.has(target, propertyKey)
+
+Where:
+    target: Target object to check has property
+    propertyKey: Key of the property to check exists
+
+(Returns true or false)
+
+--
+
+Reflect.ownKeys(target)
+
+Where:
+    target: Target object to get properties of
+
+(Returns an array of property keys)
+
+--
+
+Reflect.defineProperty(target, propertyKey, attributes)
+
+Where:
+
+    target: Target object define property on
+    propertyKey: Key of the property define
+    attributes: Configuration object to define property conifg
+
+
+--
+
+Reflect.deleteProperty(target, propertyKey)
+
+Where:
+
+    target: Target object delete property from
+    propertyKey: Key of the property delete
+
+
+--
+
+Reflect.getOwnPropertyDescriptor(target, propertyKey)
+
+Where:
+
+    target: Target object get property descriptor for
+    propertyKey: Key of the property to fetch descriptor (config) for
+
+
+
+PROPERTY EXTENSIONS
+--------------------
+
+Reflect.preventExtensions(target)
+
+Where:
+
+    target: Target object get prevent extension on
+
+(This prevents us from adding new properties to an object)
+
+--
+
+Reflect.isExtensible(target)
+
+Where:
+
+    target: Target object check extension on
+
+(Returns true or false)
+
+

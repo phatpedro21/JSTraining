@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+<body>
+    <!-- THESE TAGS ALLOW FOR EMBEDDED JS-->
+    <%- 
+        function(){        
+            let ghost = {name:"Ghosty", action:"scare"};
+            let words = ghost.name + " I'm here to " + ghost.action;
+            return words;
+        }();
+    -%>
+</body>
+</html>

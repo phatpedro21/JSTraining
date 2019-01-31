@@ -1,0 +1,26 @@
+EJS Uses the following syntax
+
+
+Generally, html is exactly the same as you'd expect.
+
+To insert JS we use 
+
+<% %> Tags
+
+An '=' sign will simply 'return' the following value
+
+To perform plain javascript, we exclude the '=' 
+
+We can wrap html with jsfor example to loop through a list
+
+<% for(let is=0; i<list.length; i++) %>
+
+    <li> <% =list[i] %>
+
+//Close our for loop after
+<% } %>
+
+
+TO use embedded formatting in output we use a '-'
+
+<%- %>

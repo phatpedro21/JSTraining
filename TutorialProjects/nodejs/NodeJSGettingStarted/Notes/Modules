@@ -1,0 +1,89 @@
+MODULES
+--------
+In Node, a module is essentialy any file or folder that contains code
+
+!!THIS WAY OF WORKING IS DIFFERENT IN THE BROWSER!!
+In Node, any file is wrapped in a function (a simple one line javascriptFile, will be wrapped in a function),
+And this function is automatically passed 5 arguments
+- exports (and this is really just shorthand for module.exports)
+- module
+- require
+- __filename
+- __dirname
+
+
+(Because exports is an alias for module.exports, if we want to return a function as the top level of our API,
+we cannot simply type
+    
+        exports = () => {};
+        //this simply redefined what exports 'points to'
+
+we have to do
+
+        module.exports = () => {};
+)
+
+So these are not global variables, they have been passed in by node, and will be different for each file
+
+By default, this wrapping function will 
+    return module.exports
+
+When we call require('modulepath') in another piece of code, it then returns the 
+module.exports object for us to use.
+
+
+DIFFERENT EXPORTING APPROACHES
+---------------------------------
+
+If we want our API to be a simple object, we can simply assign values to exports.
+e.g.    
+
+        exports.name = "Peter";
+        exports.age = 23;
+        exports.introduce = () => {console.log("Hello")};
+
+When this module is required(), we simply use it as an object 
+
+--------------------------------------------------------------------
+
+If we want our top level object to be a 'primitive' (string, array etc...) we need to redefine module.exports, as by default 
+it is expected to be an object.
+e.g.
+
+        module.exports = [2, 5, 8, 11];
+
+When this module is required() we get the array values back, so we can simply
+inline the call, or assign it to a variable.
+e.g.
+        console.log(require('arrayModule'));
+        //which will print [2,5,8,11]
+
+
+--------------------------------------------------------------------
+
+Thirdly, we can export a function, which is useful if we want some control over what the API returns to us, for example if we
+want our API to return a string template, but want to have control over the title perhaps
+e.g.
+
+        module.exports = title => `This is the returned string      
+        Title: ${title}
+        Content: Words and words about how modules work in node! :)`;
+
+When we require() an API like this, we are returned a function, which we can call whenever we wish, with 
+arguments.
+e.g.
+
+    const titler = require('titleModule');    
+    console.log(titler("My Title"))
+
+
+
+
+
+
+
+
+
+    
+
+

@@ -1,0 +1,45 @@
+ES6 Standardises Modules
+
+The 
+export and import keyword are our tools for handling Modules
+
+
+EXAMPLES
+
+//A module file      module.js
+
+//The export keyword 'opens up' an object
+export let projectID = 24;
+
+
+
+//Our 'main' code    main.js
+
+//The import keyword will 'fetch' exports from a module
+//as keyword will 'rename' imported variable in our code
+import {projectID as ID}  from 'module.js';
+
+
+//Import statements are 'hoisted' to top of scope. They will be called first no matter where they are declared
+
+
+//Modules can be given a default export, using the default keyword like so
+
+export default 'variable';
+//OR
+export {variable as default, <optional other exports, , >}
+
+
+//We then do not need to use { } when we import, we simply
+
+import anyName from 'module.js';
+
+
+//We can also explicitly show we are fetching default using 
+
+import { default as anyName} from 'module.js';
+
+//the * character tells us to import all, like so
+
+import * as values from 'module.js';
+//Here values will be an object containing all exports from the module

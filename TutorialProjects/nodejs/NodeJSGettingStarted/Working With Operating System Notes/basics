@@ -1,0 +1,33 @@
+there are a few built in modules in Node to help up work with the operating system
+
+e.g.
+
+os                  -enables communication with the Operating System
+
+fs                  -reading and writing to the OS
+
+child_process       -Enables us to run any OS command directly from within Node
+
+
+OS
+----
+see os-examples.js
+
+FS
+----
+Enables interation with the filesystem
+Allows us to work with buffers, streams
+
+
+CHILD_PROCESS
+-------------
+Allows us to execute any OS command within Node by creating and using a subprocess and then
+using the result of that process in our main process
+
+key methods
+
+        spawn()   <- Reccomended to use this 
+        exec()
+        execFile()
+
+        fork()  <- This one creates new Node processes, and ties in with the clusters idea

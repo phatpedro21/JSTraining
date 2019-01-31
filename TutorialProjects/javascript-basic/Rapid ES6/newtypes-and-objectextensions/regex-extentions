@@ -1,0 +1,17 @@
+Define regex patterns with '/ /'
+
+
+
+To work with the new \n{} functionality and 'more than 4 char' unicode, we need to suffix with 'u'
+
+so  pattern = /\u{1f3c4}/u WILL WORK
+              /\u{1f3c4}/  WILL NOT WORK
+
+(For unicode chars with more than 4 chars, that are seen as 2 characters by javascript we also need to use the unicode
+ suffix to allow them to be considered '1' character by the regex)
+
+
+ a y suffix will tell our regex to look from a 'lastIndex' which we can set
+
+ 
+SEE MDN FOR MORE DETAILS

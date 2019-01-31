@@ -1,0 +1,14 @@
+Keeping in mind that unknown errors should be allowed to continue and 'crash out',
+we might wonder how this will be acceptable in production.
+
+
+Generally, in production we will have many instances of node running in a node cluster
+
+We should generally be running a node cluster no matter what our set up as even with a single 
+instance/process in a cluster the Master will be keeping an eye out on what is happening
+and can restart node after a crash, monitor the issue etc. et...
+
+We can make use of clusters using...
+
+-Node Cluster module
+-Tools like PM2 which wrap the cluster module

@@ -1,0 +1,18 @@
+There are a number of web frameworks for node that 'bundle up' some more high level functionaltiy
+that the basic built in functionality.
+
+
+One of the most popular of this is 
+    Express
+
+
+Others include
+
+    koa         -focusses on more modern features of JS
+    
+    sails.js    -inspired by rails
+
+    meteor      -
+
+
+there is also React, which uses .jsx

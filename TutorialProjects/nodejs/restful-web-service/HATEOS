@@ -1,0 +1,7 @@
+HATEOS (Hypermedia as the Engine of Application State) attempts to solve the problem of 'API users not intuitively 
+understanding how to navigate around our API.
+
+E.g. a user may be able to fetch a list of books ,but it may not be obvious how to then view a single book 
+(/book/id  or /books/id ... ?)
+
+So we try to invlude our hyperlinks in our returned information

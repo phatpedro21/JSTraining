@@ -1,0 +1,42 @@
+Objects can be considered as maps, being key and value pairs, however in an object, we cannot use objects as keys
+
+In Maps (and WeakMap) we can use objects as keys
+
+
+Only difference between map and weakmap is that if an object referenced in a weakmap is garbage collected, it will automatically
+be removed from the weak map.
+
+
+With a new map created
+
+           let employeeMap = new Map();
+
+    we add values using set()
+
+            let employee1{name:"Alex"}, employee2{name:"Brenda"};
+
+            employeeMap.set(employee1, "AAA");
+            employeeMap.set(employee2, "BBB");
+
+    WE CAN ALSO create a map by passing it an iterable 
+            e.g.
+            let arr = [[employee1, "AAA"] , [employee2, "BBB"]];
+            let employeeMap = new Map(arr);            
+
+    and we can retrieve values with get() (passing the key we want)
+
+            employeeMap.get(employee1);  //Will return "AAA";
+            employeeMap.size;           //Will return 2 (number of 'pairs' in the map)
+
+    .delete(key) will remove a pair
+
+    .clear() will empty a map
+
+    .has(key) returns true if the key exists
+
+    .values() returns all values only
+
+    .entries() returns all pairs as an array
+
+
+We cannot check size on a weakmap

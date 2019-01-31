@@ -1,0 +1,77 @@
+Promises are native in node4, but not in most browsers.
+
+They extract the callback function from within the parameters that are passed to a function
+and help us separate our concerns.
+
+/*example code for explanation*/
+
+//FIRST WE SHOW NOT SO 'NICE' CALLBACK EXAMPLE, THEN A BETTER EXAMPLE USING
+//PROMISES!
+
+//// WE COULD DO SOME ASYNC TASK USING CALLBACKS (but this is not always so good...)
+//As promises/callbacks handle async code, we will simulate an async method 
+function asyncMethod(message, cb){
+    //Settimeout simulates an async 'delay'
+    setTimeout(function(){
+
+        console.log(message);
+        //Then call our callback
+        cb();
+
+        }, 5000)
+}
+
+//First we might want to open db connection, then find a user etc...
+asyncMethod("Open DB Connection", function(){
+    asyncMethod("Find User", function(){
+        //then validate the user
+        asyncMethod("Validate User", function(){
+            asyncMethod("Do other stuff, function(){})
+        })
+    })
+})
+
+///////////////////////////////////////////////
+////WE CAN MAKE NICER CODE USING PROMISES !!!!!
+
+function asyncMethod(message){
+    //We can set up this function to return a promise
+    //The fulfill argument defines what happens if we 'succeed',
+    //    reject           defines what happens if we 'fail' (we wont give explicit example here)
+
+    return new Promise(function(fulfill, reject){
+
+        setTimeout(function(){
+        console.log(message);
+        //If we get here, call out fulfill method
+        fulfill();
+        }, 5000)
+
+    }); 
+}
+
+//Now that we return a promise we can 'then' our function. Which is made to look better 
+//using named functions
+
+//Because a promise is an object, it can be returned and dealt with, chaining
+//our thens to create very tidy syntax 
+
+function findUser(){
+     return asyncMethod("Find User");     
+}
+function validateUser(){
+    return asyncMethod.("Validate User");
+}
+function doStuff(){
+    return asyncMethod.("Do Stuff");       
+}
+
+//Leaving us with a very tidy 'callback' chain
+asyncMethod("Open DB Connection")
+    .then(findUser)
+    .then(validateUser)
+    .then(doStuff)
+    .then(function(){});;
+
+
+

@@ -1,0 +1,8 @@
+Make an object 'read only' we can define the writable property of an object
+to false.
+
+This will stop assignment to the values of an object to a new value.
+
+this will not throw an error 'normally' javascript will fail gracefully, and continue
+without changing the value.
+'use strict' to ensure an error is thrown in this case

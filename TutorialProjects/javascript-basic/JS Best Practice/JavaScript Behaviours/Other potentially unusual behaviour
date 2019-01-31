@@ -1,0 +1,22 @@
+DUPES
+--------
+If we were t oaccidentally define a 'parameter' more than once, e.g.
+
+function myFunc(a,b,c,a){
+    console.log(a);
+}
+
+Javascript will simply treat the last 'dupe' as the value e.g.
+
+myFunc(10,20,30,40)
+
+would print 40.
+
+To show an error in this case, we need to use strictmode.
+
+THE delete KEYWORD AND DELETING PROPERTIES
+-------------------------------------------
+The delete keyword will only delete PROPERTIES on an object.
+
+Attempting to delete an entire object will fail gracefully (continue without deleting)
+or throw an error in strictmode.

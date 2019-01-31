@@ -1,0 +1,31 @@
+startsWith(), endsWith()
+------------------------
+Returns true is a string starts or ends with a particular substring,
+else returns false
+
+
+includes()
+-----------
+Checks if a string has a substring anywhere within it
+
+\u{}
+-----
+This allows us to insert unicode values 
+e.g.
+
+    let string = " \u{21F9} \u{1F441}"
+
+    //string would be the string "⇹ 👁"
+
+
+.raw
+------
+This is a new function but can be used as a template tag.
+
+This will interpolate values,but will not escape escape chars
+
+
+.repeat
+--------
+will repeat a string a given number of times
+

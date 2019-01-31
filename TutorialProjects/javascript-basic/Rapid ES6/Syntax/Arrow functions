@@ -1,0 +1,31 @@
+ARROW FUNCTIONS
+----------------
+arrow functions are defined using the '=>' notation
+
+Arrow functions are short hand for defining a function.
+
+example
+
+let myArrowFunc = () => "Hello";
+
+More details--
+
+BEFORE THE ARROW
+if we have 0 params, we need empty brackets ()
+if we have 1 param, we do not need brackets, just the param
+if we have more than 1 param, we comma separate and use brackets
+
+AFTER THE ARROW
+If our function only contains one line of code, we can leave off the return keyword
+Otherwise we can use { } after the arrow and use the return keyword when needed
+
+
+Arrow functions also solve the issue of what 'this' points to when handling callbacks and events
+
+In an arrow function, this will point to the context that calls the code, not the 'object' that 
+the callback/event was called on.
+
+New objects cannot be bound (using bind) to arrow functions. We cannot control what this 
+points to within an arrow function.
+
+The '=>' symbol cannot be placed onto a new line from the beginning of our definition.

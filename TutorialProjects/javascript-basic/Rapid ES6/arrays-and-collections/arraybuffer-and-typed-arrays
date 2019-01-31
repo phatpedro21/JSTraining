@@ -1,0 +1,22 @@
+ArrayBuffers
+------------
+These are arrays of 8 bit bytes
+
+Created with new ArrayBuffer(bytelength)
+
+has .byteLength property
+
+
+TYPED ARRAYS
+------------
+These are arrays of numeric types 
+such as 
+Int8Array()
+Uint8Array()
+UintClampedArray()  -will clamp values to 0-255
+Int32Array()
+Uint16Array()
+Float64Array()
+
+These are placed 'over' ArrayBuffers which holds the values and tell us how to "read" the byte arrays
+

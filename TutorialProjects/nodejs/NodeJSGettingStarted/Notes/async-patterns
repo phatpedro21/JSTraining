@@ -1,0 +1,19 @@
+Node has very heavily used the 'callback' pattern for a long time, although it 
+is starting to pick up new patterns as they become available.
+
+
+Node implements an 'error first callback pattern' in which callback functions (the last argument to any ansync method)
+expect an error object first, and then data.
+
+If an error is encountered this is passed as the first argument, else the first argument will be null
+
+
+Node has started to adapt promises however, making for neater, cleaner code that avoids the pitfalls of 
+callbacks.
+
+the 
+    util 
+module, provides a method allowing us to 
+    promisify 
+
+any built in async API methods

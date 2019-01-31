@@ -1,0 +1,113 @@
+This document will (hopefully) keep track of the steps taken, reasons for them and keep notes/comments about
+the process.
+
+SET UP
+-------
+
+set up a .npmrc (per user config file) to tell npm to save exact versions.
+
+created app.js as out entry point
+
+Created an index.html and served it up to GET '/'
+
+We could have pulled jQuery and Bootstrap from their respective CDNs into our index.html
+but this would have been an issue if trying to work offline
+SO INSTEAD
+Created public folder with css and js subfolders to hold stuff we want to serve up ourselves, download these files 
+into this folder (can be done via NPM)
+WE ALSO WANT TO SET IT UP SO THAT
+Whenever we npm update to get new versions of bootstrap, jquery etc... we dont have to manually move it over into
+out public folder. By pointing express to our node_modules folders aswell
+
+ESLint set up to lint our code, and we are using AIRBNB style. (npm scripts will assume a locally installed package if trying to run one ,so we don't need (OR WANT) to installed
+eslint globally.
+ESLint will warn us when we make a number of 'mistakes' (including requiring a package that isn't in the package.json, etc..)
+
+Set up 'Nodemon' to restart our app when we make changes to our code
+AND
+To contain a number of environment variables for us to use in our app (e.g. PORT numbers etc...)
+
+
+BUILDING UP OUR APP
+--------------------
+We will be using 'EJS' as our templating engine, to dynamically create our html
+(However, there is an example page built using 'pug', to showcase its capabilities, pug is a very minimalist appraoch)
+
+We have told our app where to look for for views, which it will check when we call .render on a response.
+
+Downloaded a template site from https://www.bootstrapzero.com/bootstrap-template/storystrap to give us a groundwork to work from
+
+ROUTING:
+-We could continue to add 'server'.get() calls for each route we want to handle, but better to use 'routers' which encapsulate all of our
+routes
+
+Middleware is anythign that 'hijacks' a process, does it's thing then returns flow back to the original process. Morgan is an example of middleware, hijacking 
+requests into the server, printing a log and then returning tothe server process.
+There is an example of using our own middleware in out bookRouter, where .all() contains 'middleware' that will fetch a book item everytime a request comes to
+/book/id. instead of mhaving to type the request for every potential action in response to that request
+
+
+SERVING DATA
+-------------
+I will set up an SQL and a MongoDB database to connect to to show off how both can connect with node.
+
+SQL
+---
+Creating an azure hosted DB and hooking up to it with 'mssql' package.
+Which we can make requests to as you would expect with database things and use the results
+
+MongoDB
+--------
+MongoDB is generally propular for use with node
+After installing MongoDB, I have set up an admin Router to 'populate' the mongo db. 
+calling /admin will populate the library collection on mongo db
+
+(Must remeber the _id that mongodb adds is of type ObjectID ...)
+
+
+
+SECURITY and AUTHENTICATION
+----------------------------
+we are going to use Passport which is the default package that express uses for user management.
+We will be handling this 'locally' but there are other ways e.g (google facebook etc...);
+
+Passport helps handle user information over a users session, putting it into and pulling it out of cookies, etc...
+To assist with the we also install and use 'cookie-parser' and 'express-session'
+
+Passport uses 'strategies' to handle different methods of signin/authentication. For example we are working locally so will use 
+passport-local strategy,  (but we might need other passport strategies to allow for logging in via facebook, google etc...)
+
+
+CODE STRUCTURE
+--------------
+Controllers are a good way to structure our routing code
+
+THIRD PARTY API
+----------------
+We are goingto use the GoodReads api to pull in information about books for our page
+
+We are going to access this API using a 'service' (which is similar to our controller)
+
+goodreads returns xml, so we will convert this to json, 
+We wil lalso use Axios instead of built in 'http'
+
+
+
+THINGS TO CONSIDER
+-------------------
+debug: We are aiming to avoid using console.log, instead we will use debug (which only runs while in debug mode (SET DEBUG=* &node file))
+       Or we can only ask for debugging from a particular source (set DEBUG=target &node file)
+
+morgan: this will log out to our console things regarding web traffic, so that we dont have to.
+
+path:   Using this built in node package to handle filepath concatenation so that we don't have to remember leading slashes
+
+
+VS Code Features: -Selecting a name/keyword/etc... used more than oncem we can press f2 to change all instances of that word at one time
+
+body-parser:    To access the posted parameters in our routes, we are using body-parser to make them available on req(uest).body
+
+INSTALLS
+--------
+Express - web server
+Chalk   - to assist debugging

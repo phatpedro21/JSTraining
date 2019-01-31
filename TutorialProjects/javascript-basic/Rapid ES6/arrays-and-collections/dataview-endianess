@@ -1,0 +1,21 @@
+Big endian most significant bit stored first
+Little endian least significant bit stored first
+
+We use the Dataview object to handle endianess
+
+We can create a DataView() by passing it an ArrayBuffer
+
+DataView then gives us some functionality ontop of our ArrayBuffer
+
+such as....
+
+    We dont use [] notation, we set data using functions so.
+
+        To set an unsigned int at position 0 with value 1
+
+        dataview.setUint8(0,1);
+
+    DataViews deal with big endian by default, to tell it to work otherwise we use
+
+        dataview.getUint8(0, true)
+        //here its looking for value at position 0, but reading it as little endian as set wby the true

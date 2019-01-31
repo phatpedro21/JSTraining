@@ -1,0 +1,29 @@
+let KEYWORD
+------------
+while using the var keyword variables will be 'hoisted' (declared and set to undefined at start of scope)
+
+the let keyword stops this functionality, leading to 'variable undefined' errors should a variable be
+accessed before its definition
+
+let variables also cannot be redefined 
+
+const KEYWORD
+-------------
+It's good to define constants with UPPERCASE_NAMES
+
+consts must be initialised when created, otherwise we get an errors
+
+consts cannot be redefined, we will get an error if we try to.
+
+BLOCK SCOPING
+-------------
+Using curly braces we can define new Block Scopes
+
+for example...
+
+let aVar = 10;
+{
+    let aVar = 20;
+}
+console.log(aVar); //Will print 10, as the second declaration is within a now closed scope;
+

@@ -1,0 +1,19 @@
+ES6 Has native support for Promises
+
+Passing values to the reject() or resolve() will be passed on to the 'callbacks' called in hten
+
+Returning a value from a promise resolution/rejection is returned as a nother promise to be used in the chain
+
+
+
+Promise.all()
+-------------
+
+We can pass Promise.all() an array of promises (or code that returns promises) and it will only complete its 
+.then  once all promises are completed and resolved. (unless looking for failures, as soon as one fails, it will complete failued
+code)
+
+Promise.race()
+--------------
+
+Like Promise.all(), but will take the first promise that returns first and handle depending on that result.

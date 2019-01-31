@@ -1,0 +1,52 @@
+REST
+----------------
+'...' defines 'rest'
+
+As a function parameter, the symbol will 'gather' trailing arguments into an array
+
+let restFunc = function(a, index, ...others)
+{
+    if(index < (others.length-1);
+    console.log(others[index]);
+}
+restFunc(10,3, 30, 46, 100, 53);
+
+
+If there are no args to put into our 'rest' param, it will be set to an empty array
+but the rest parameter will be ignored if checking the 'length' of a function (it will only return)
+the number of non rest params
+
+------------------------------------------------------
+
+SPREAD
+------------------
+
+-Spread is basically the opposite of rest, using the same '...' symbol
+
+-Given an array, list etc... we can split it up into components,
+
+for example
+
+Math.max takes as many args as we wish and returns the biggest
+if we have an array on nums,
+
+let numbers = [13,43,56,22,53,12]
+
+//And we want to pass them as args to math.max we use spread, to pull out each individual number
+Math.max(...numbers);
+
+
+-We can also use spread to copy arrays
+like so...
+
+let newNumArr = [...numbers];
+
+Missing values using this method will be set to undefined
+e.g.
+let missingData = Array(...[,,]);
+
+will set missingData to [undefined, undefined]
+
+
+-Spread can also split a string into individual chars
+

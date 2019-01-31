@@ -1,0 +1,16 @@
+STATIC MEMBERS
+--------------
+ES6 Introduces the static keyword
+
+static methods are attached directly to the class.
+
+This means that they MUST be called on the class, and cannot be called on instances.
+
+
+To create static parameters, we can simply assign a variable to a class (static keyword doesn't work for this)
+e.g.
+
+    class Thing{
+
+    }
+    Thing.staticVar = 10;

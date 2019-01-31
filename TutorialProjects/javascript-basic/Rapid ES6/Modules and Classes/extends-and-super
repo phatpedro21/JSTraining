@@ -1,0 +1,40 @@
+The extends keyword allows us to inherit from other classes 
+
+e.g.
+
+        class Project{
+            constructor(){
+                console.log("PROJECT Constructor");
+            }
+        }
+
+        //this class will extend Project
+        class SoftwareProject extends Project{
+        }
+
+        let p = new SoftwareProject(); //Will print "PROJECT Constructor" (as it 'inherits' the constructor from Project)
+
+
+        //This class extends project, but has its own constructor, which calls Projects constructor to handle the 'inherited' set up
+        class HardwareProject extends Project{
+            constructor(){
+                //Call to 'parent' constructor
+                super()
+                console.log("Some hardware stuff too");
+            }
+        }
+
+        let p2 = new HardwareProject(); //Will print "PROJECT Constructor"
+                                                     "Some hardware stuff too"
+
+
+
+- The super keyword also allows us to access our parent in other places, e.g. to call a function from our parent
+
+    super.function();
+
+- We can also use super in object literals, we simply need to 
+    .setPrototypeOf() another object as our prototype which will be referenced by super
+
+
+        

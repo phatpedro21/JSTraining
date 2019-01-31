@@ -1,0 +1,14 @@
+There are a lot of 'variables' that may be different between our environments 
+(production, development etc...)
+
+A tool called Node Forman can help us handle these issues
+
+Node Forman can do many things but one of these is handling environment variables
+
+once installed we can call
+
+nf.js
+
+We can then use nf instead of node to call our 'scripts' in our package file,
+and node foreman will look for an .env file and use the values in here to 'fill' our 
+environment specific variables.

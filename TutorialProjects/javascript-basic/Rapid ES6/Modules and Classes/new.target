@@ -1,0 +1,9 @@
+new.target  points to the calling constructor, which helps us to 'know' what is calling our constructor when dealing with inheritance
+
+e.g. 
+
+new.target in a parent constructor will return
+
+    -the parents constructor if the parent is being called directly
+
+    -the childs constructor is super is being called from the child constructor

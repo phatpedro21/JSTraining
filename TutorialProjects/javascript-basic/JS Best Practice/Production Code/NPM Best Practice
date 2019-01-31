@@ -1,0 +1,42 @@
+When creating a new Node project first thing we should do it call
+
+npm init 
+
+
+This will set up our package.json file.
+
+
+PACKAGE.JSON
+-------------
+
+Within out package.json file we should thing about the following
+
+--the engine keyword--
+
+    //Here is an example of setting up for a node 4.2.1 engine
+    "engines":{
+        "node":"4.2.1"
+    }
+
+    The engines keyword tells the project what 'version' of an engine
+    it should run for. so that if our package is 'out of date' npm install 
+    will raise an error
+
+
+--npm save by default--
+    To avoid having to add --save to npm install lines (to update the package.json)
+    we should call the following lines
+
+    npm config set save=true
+
+
+--stop dependencies using the ^
+    When dependencies are added to package.json, the may have the '^' in their
+    version meaning "this version or similar" (allowing minor changes to be acceptable)
+
+    However, this could lead to issues, to ensure we only ever get a tried and tested 
+    version of dependencies we can use the following lines
+
+    npm config set save-exact=true
+
+    (And then we can simply install newer versions when we have tested them)
